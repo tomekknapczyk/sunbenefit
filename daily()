@@ -1,0 +1,9 @@
+
+[37;41m                                         [39;49m
+[37;41m  Command "$schedule-;" is not defined.  [39;49m
+[37;41m                                         [39;49m
+[37;41m  Did you mean one of these?             [39;49m
+[37;41m      schedule:run                       [39;49m
+[37;41m      schedule:work                      [39;49m
+[37;41m                                         [39;49m
+
