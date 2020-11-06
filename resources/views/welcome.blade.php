@@ -18,35 +18,39 @@
 
             <div class="mt-8 bg-white overflow-hidden shadow sm:rounded-lg">
                 <div class="grid grid-cols-1 md:grid-cols-2">
-                    <div class="p-6">
-                        <div class="flex items-center">
-                            <x-heroicon-o-adjustments class="w-8 h-8 text-green-700"/>
-                            <div class="ml-4 text-lg leading-7 font-semibold">
-                                <a href="{{ route('login') }}" class="text-green-700">Kalkulator</a>
+                    <a href="{{ route('login') }}" class="hover:bg-gray-100">
+                        <div class="p-6 text-green-700">
+                            <div class="flex items-center">
+                                <x-heroicon-o-adjustments class="w-8 h-8"/>
+                                <div class="ml-4 text-lg leading-7 font-semibold">
+                                    Kalkulator
+                                </div>
                             </div>
-                        </div>
 
-                        <div class="ml-12">
-                            <div class="mt-2 text-gray-600 text-sm">
-                                Stwórz wycenę instalacji fotowoltaicznej
+                            <div class="ml-12">
+                                <div class="mt-2 text-gray-600 text-sm">
+                                    Stwórz wycenę instalacji fotowoltaicznej
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    </a>
 
-                    <div class="p-6 border-gray-200 md:border-l">
-                        <div class="flex items-center">
-                            <x-heroicon-o-globe class="w-8 h-8 text-green-700"/>
-                            <div class="ml-4 text-lg leading-7 font-semibold">
-                                <a href="https://www.sunbenefit.pl/" target="_blank" class="text-green-700">Sunbenefit.pl</a>
+                    <a href="https://www.sunbenefit.pl/" target="_blank" class="hover:bg-gray-100">
+                        <div class="p-6 border-gray-200 md:border-l text-green-700">
+                            <div class="flex items-center">
+                                <x-heroicon-o-globe class="w-8 h-8"/>
+                                <div class="ml-4 text-lg leading-7 font-semibold">
+                                    Sunbenefit.pl
+                                </div>
                             </div>
-                        </div>
 
-                        <div class="ml-12">
-                            <div class="mt-2 text-gray-600 text-sm">
-                                Strona internetowa firmy
+                            <div class="ml-12">
+                                <div class="mt-2 text-gray-600 text-sm">
+                                    Strona internetowa firmy
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    </a>
                 </div>
             </div>
         </div>

@@ -14,7 +14,7 @@
 
         <div class="mt-5">
             <x-jet-danger-button wire:click="confirmUserDeletion" wire:loading.attr="disabled">
-                {{ __('Delete Account') }}
+                {{ __('Delete Account') }} asd
             </x-jet-danger-button>
         </div>
 

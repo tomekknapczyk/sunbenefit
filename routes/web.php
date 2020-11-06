@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\HomeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,6 +18,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
-    return view('dashboard');
-})->name('dashboard');
+Route::group(['middleware' => ['auth', 'verified']], function () {
+    Route::get('/home', [HomeController::class, 'index'])->name('home');
+    Route::get('/pracownicy', [HomeController::class, 'employees'])->name('employees')->middleware('can:list users');
+    Route::get('/nowy-pracownik', [HomeController::class, 'create'])->name('create_employee')->middleware('can:create users');
+});

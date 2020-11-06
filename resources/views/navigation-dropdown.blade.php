@@ -5,15 +5,33 @@
             <div class="flex">
                 <!-- Logo -->
                 <div class="flex-shrink-0 flex items-center">
-                    <a href="{{ route('dashboard') }}">
+                    <a href="{{ route('home') }}">
                         <x-jet-application-mark class="block h-9 w-auto" />
                     </a>
                 </div>
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-jet-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
-                        {{ __('Dashboard') }}
+                    <x-jet-nav-link href="{{ route('home') }}" :active="request()->routeIs('home')">
+                        {{ __('Home') }}
+                    </x-jet-nav-link>
+                    @can('edit users')
+                        <x-jet-nav-link href="{{ route('employees') }}" :active="request()->routeIs('employees')">
+                            {{ __('Przedstawiciele') }}
+                        </x-jet-nav-link>
+                    @endcan
+                    @can('edit modules')
+                        <x-jet-nav-link href="{{ route('employees') }}" :active="request()->routeIs('modules')">
+                            {{ __('Moduły') }}
+                        </x-jet-nav-link>
+                    @endcan
+                    @can('edit surcharges')
+                        <x-jet-nav-link href="{{ route('employees') }}" :active="request()->routeIs('surcharges')">
+                            {{ __('Dopłaty') }}
+                        </x-jet-nav-link>
+                    @endcan
+                    <x-jet-nav-link href="{{ route('employees') }}" :active="request()->routeIs('calculations')">
+                        {{ __('Wyceny') }}
                     </x-jet-nav-link>
                 </div>
             </div>
@@ -117,8 +135,8 @@
     <!-- Responsive Navigation Menu -->
     <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
         <div class="pt-2 pb-3 space-y-1">
-            <x-jet-responsive-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
-                {{ __('Dashboard') }}
+            <x-jet-responsive-nav-link href="{{ route('home') }}" :active="request()->routeIs('home')">
+                {{ __('Home') }}
             </x-jet-responsive-nav-link>
         </div>
 

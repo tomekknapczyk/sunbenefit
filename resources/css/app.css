@@ -1,3 +1,8 @@
 @import 'tailwindcss/base';
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
+
+a,
+button{
+    @apply transition-all duration-300 ease-in-out
+}
