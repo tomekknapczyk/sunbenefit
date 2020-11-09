@@ -11,12 +11,14 @@ class Create extends Component
 {
     use PasswordValidationRules;
 
+    public $groups;
     public $name;
     public $lastname;
     public $phone;
     public $email;
     public $password;
     public $password_confirmation;
+    public $group = 'A';
 
     public function updated($propertyName)
     {
@@ -25,6 +27,7 @@ class Create extends Component
             'lastname' => ['required', 'string', 'max:255'],
             'phone' => ['nullable', 'string', 'max:255'],
             'email' => ['required', 'email', 'max:255', 'unique:users'],
+            'group' => ['required', 'string'],
             'password' => $this->passwordRules(),
         ]);
     }
@@ -42,6 +45,7 @@ class Create extends Component
             'lastname' => ['required', 'string', 'max:255'],
             'phone' => ['nullable', 'string', 'max:255'],
             'email' => ['required', 'email', 'max:255', 'unique:users'],
+            'group' => ['required', 'string'],
             'password' => $this->passwordRules(),
         ]);
 
@@ -54,6 +58,8 @@ class Create extends Component
         ]);
 
         $user->assignRole('przedstawiciel');
+
+        $user->assingGroup($this->group);
 
         notify()->success('Przedstawiciel utworzony!', 'Sukces');
         

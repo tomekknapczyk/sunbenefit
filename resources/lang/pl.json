@@ -88,5 +88,6 @@
     "For your security, please confirm your password to continue.": "Ze względów bezpieczeństwa potwierdź hasło, aby kontynuować.",
     "Confirm": "Potwierdź",
     "Whoops! Something went wrong.": "Ups! Coś poszło nie tak.",
-    "The :attribute must be at least :length characters.": ":attribute musi posiadać co najmniej :length znaków."
+    "The :attribute must be at least :length characters.": ":attribute musi posiadać co najmniej :length znaków.",
+    "Group": "Grupa"
 }

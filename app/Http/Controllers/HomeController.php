@@ -24,6 +24,7 @@ class HomeController extends Controller
      */
     public function index()
     {
+        auth()->user()->assingGroup('a');
         return view('dashboard');
     }
 
@@ -50,6 +51,12 @@ class HomeController extends Controller
      */
     public function create()
     {
-        return view('employees.create');
+        $groups = \App\Models\Group::get();
+
+        $data = [
+            'groups' => $groups,
+        ];
+
+        return view('employees.create', $data);
     }
 }

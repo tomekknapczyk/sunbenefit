@@ -36,14 +36,25 @@
             <x-jet-input-error for="email" class="mt-2" />
         </div>
 
+        <!-- Grupa -->
+        <div class="col-span-6 sm:col-span-4">
+            <x-jet-label for="group" value="{{ __('Group') }}" />
+            <select id="group" wire:model.defer="group" class="mt-1 block form-select w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5">
+                @foreach ($groups as $group)
+                    <option value="{{ $group->name }}">{{ $group->name }}</option>
+                @endforeach
+            </select>
+            <x-jet-input-error for="group" class="mt-2" />
+        </div>
+
         <div class="rounded-xl p-3 col-span-6 sm:col-span-4 shadow">
             <x-jet-label for="password" value="{{ __('New Password') }}" />
             <div>
-                <x-jet-input id="password" type="password" class="mt-1 block w-full" wire:model.debounce.200ms="password" autocomplete="new-password" />
+                <x-jet-input id="password" type="password" class="mt-1 block w-full" wire:model.defer="password" autocomplete="new-password" />
             </div>
             <div class="mt-2">
                 <x-jet-label for="password_confirmation" value="{{ __('Confirm Password') }}" />
-                <x-jet-input id="password_confirmation" type="password" class="mt-1 block w-full" wire:model.200ms="password_confirmation" autocomplete="new-password" />
+                <x-jet-input id="password_confirmation" type="password" class="mt-1 block w-full" wire:model.defer="password_confirmation" autocomplete="new-password" />
                 
                 <x-jet-input-error for="password" class="mt-2" />
                 <x-jet-input-error for="password_confirmation" class="mt-2" />
