@@ -1,4 +1,4 @@
-<div class="flex flex-col" wire:model="confirm">
+<div class="flex flex-col">
     <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
         <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
             <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
@@ -45,12 +45,15 @@
                                     @endif
                                 </td>
                                 <td class="px-6 py-4 whitespace-no-wrap text-right text-sm leading-5 font-medium">
+                                    <x-jet-button class="ml-2" wire:click="confirmChangingGroup({{ $employee['id'] }})" wire:loading.attr="disabled">
+                                        {{ __('Change group') }}
+                                    </x-jet-button>
                                     @if(!$employee->trashed())
-                                    <x-jet-danger-button class="ml-2" wire:click="confirmDeactivation({{ $employee['id'] }})" wire:loading.attr="disabled">
+                                    <x-jet-danger-button class="ml-2" wire:click="confirmChangingStatus({{ $employee['id'] }})" wire:loading.attr="disabled">
                                         {{ __('Deactivate Account') }}
                                     </x-jet-danger-button>
                                     @else
-                                    <x-jet-button class="ml-2" wire:click="confirmDeactivation({{ $employee['id'] }})" wire:loading.attr="disabled">
+                                    <x-jet-button class="ml-2" wire:click="confirmChangingStatus({{ $employee['id'] }})" wire:loading.attr="disabled">
                                         {{ __('Activate Account') }}
                                     </x-jet-button>
                                     @endif
@@ -62,8 +65,9 @@
             </div>
         </div>
     </div>
-    <!-- Delete User Confirmation Modal -->
-    <x-jet-dialog-modal wire:model="confirm">
+
+    <!-- Change User Status Modal -->
+    <x-jet-dialog-modal id="changingStatusModal" wire:model="changingStatus">
         <x-slot name="title">
             @if(isset($selectedUser))
                 @if(!$selectedUser->trashed())
@@ -88,20 +92,52 @@
         </x-slot>
 
         <x-slot name="footer">
-            <x-jet-secondary-button wire:click="$toggle('confirm')" wire:loading.attr="disabled">
+            <x-jet-secondary-button wire:click="$toggle('changingStatus')" wire:loading.attr="disabled">
                 {{ __('Nevermind') }}
             </x-jet-secondary-button>
 
             @if(isset($selectedUser))
                 @if(!$selectedUser->trashed())
-                    <x-jet-danger-button class="ml-2" wire:click="changeUserActive" wire:loading.attr="disabled">
+                    <x-jet-danger-button class="ml-2" wire:click="changeUserStatus" wire:loading.attr="disabled">
                         {{ __('Deactivate Account') }}
                     </x-jet-danger-button>
                 @else
-                    <x-jet-button class="ml-2" wire:click="changeUserActive" wire:loading.attr="disabled">
+                    <x-jet-button class="ml-2" wire:click="changeUserStatus" wire:loading.attr="disabled">
                         {{ __('Activate Account') }}
                     </x-jet-button>
                 @endif
+            @endif
+        </x-slot>
+    </x-jet-dialog-modal>
+
+
+    <!-- Change User Group Modal -->
+    <x-jet-dialog-modal id="changingGroupModal" wire:model="changingGroup">
+        <x-slot name="title">
+            @if(isset($selectedUser))
+                {{ __('Change user group') }}
+
+                <p class="text-gray-500 text-sm">{{ $selectedUser->name }} {{ $selectedUser->lastname }} | {{ $selectedUser->email }}</p>
+            @endif
+        </x-slot>
+
+        <x-slot name="content">
+            <select id="group" wire:model.defer="group" class="mt-1 block form-select w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5">
+                @foreach ($groups as $group)
+                    <option value="{{ $group->name }}">{{ $group->name }}</option>
+                @endforeach
+            </select>
+        </x-slot>
+
+        <x-slot name="footer">
+            <x-jet-secondary-button wire:click="$toggle('changingGroup')" wire:loading.attr="disabled">
+                {{ __('Nevermind') }}
+            </x-jet-secondary-button>
+
+            @if(isset($selectedUser))
+                <x-jet-button class="ml-2" wire:click="changeUserGroup" wire:loading.attr="disabled">
+                    {{ __('Change group') }}
+                </x-jet-button>
             @endif
         </x-slot>
     </x-jet-dialog-modal>

@@ -25,6 +25,21 @@ class Show extends Component
     public $employees;
 
     /**
+     * Collection of groups.
+     *
+     * @param  array  $models
+     * @return \Illuminate\Database\Eloquent\Collection
+     */
+    public $groups;
+
+    /**
+     * Selected group
+     *
+     * @var mixed
+     */
+    public $group = "A";
+
+    /**
      * Selected user
      *
      * @var mixed
@@ -32,42 +47,27 @@ class Show extends Component
     public $selectedUser;
 
     /**
-     * Indicates if user deletion is being confirmed.
+     * Indicates if user status changing is being confirmed.
      *
      * @var bool
      */
-    public $confirm = false;
+    public $changingStatus = false;
 
     /**
-     * Confirm that the admin would like to deactivate user.
+     * Indicates if user group changing is being confirmed.
      *
-     * @param  mixed  $user
-     * @return void
+     * @var bool
      */
-    public function confirmDeactivation($id)
-    {
-        $this->selectedUser = User::withTrashed()->findOrFail($id);
-        $this->confirm = true;
-    }
+    public $changingGroup = false;
 
     /**
-     * Change user status
+     * Create a new component instance.
      *
-     * @param  mixed  $user
      * @return void
      */
-    public function changeUserActive()
+    public function mount()
     {
-        if ($this->selectedUser->trashed()) {
-            $this->selectedUser->restore();
-        } else {
-            $this->selectedUser->delete();
-        }
-
-        $this->confirm = false;
-        $this->selectedUser = null;
-
-        $this->emit('userStatusChanged');
+        $this->groups = \App\Models\Group::get();
     }
 
     /**
@@ -78,5 +78,65 @@ class Show extends Component
     public function render()
     {
         return view('livewire.employees.show');
+    }
+
+    /**
+     * Confirm that the admin would like to change user status.
+     *
+     * @param  mixed  $user
+     * @return void
+     */
+    public function confirmChangingStatus($id)
+    {
+        $this->selectedUser = User::withTrashed()->findOrFail($id);
+        $this->changingStatus = true;
+    }
+
+    /**
+     * Confirm that the admin would like to change user group.
+     *
+     * @param  mixed  $user
+     * @return void
+     */
+    public function confirmChangingGroup($id)
+    {
+        $this->selectedUser = User::withTrashed()->findOrFail($id);
+        $this->group = $this->selectedUser->group->first()->name;
+        $this->changingGroup = true;
+    }
+
+    /**
+     * Change user status
+     *
+     * @param  mixed  $user
+     * @return void
+     */
+    public function changeUserStatus()
+    {
+        if ($this->selectedUser->trashed()) {
+            $this->selectedUser->restore();
+        } else {
+            $this->selectedUser->delete();
+        }
+
+        $this->changingStatus = false;
+        $this->selectedUser = null;
+
+        $this->emit('userStatusChanged');
+    }
+
+    /**
+     * Change user group
+     *
+     * @param  mixed  $user
+     * @return void
+     */
+    public function changeUserGroup()
+    {
+        $this->selectedUser->assingGroup($this->group);
+        $this->changingGroup = false;
+        $this->selectedUser = null;
+
+        $this->emit('userStatusChanged');
     }
 }
