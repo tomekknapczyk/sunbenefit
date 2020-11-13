@@ -21,7 +21,7 @@
                         </x-jet-nav-link>
                     @endcan
                     @can('edit modules')
-                        <x-jet-nav-link href="{{ route('employees') }}" :active="request()->routeIs('modules')">
+                        <x-jet-nav-link href="{{ route('modules') }}" :active="request()->routeIs('modules')">
                             {{ __('Moduły') }}
                         </x-jet-nav-link>
                     @endcan

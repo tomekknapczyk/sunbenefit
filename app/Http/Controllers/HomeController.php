@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\User;
 
 class HomeController extends Controller
 {
@@ -24,39 +23,9 @@ class HomeController extends Controller
      */
     public function index()
     {
-        auth()->user()->assingGroup('a');
+        // \App\Models\PriceList::first()->assingGroup('A');
+        // $a = \App\Models\Module::first()->priceListsByName('A');
+
         return view('dashboard');
-    }
-
-    /**
-     * Show employees list
-     *
-     * @return Illuminate\View\View
-     */
-    public function employees()
-    {
-        $employees = User::role('przedstawiciel')->withTrashed()->where('id', '!=', auth()->user()->id)->get();
-
-        $data = [
-            'employees' => $employees,
-        ];
-
-        return view('employees.index', $data);
-    }
-
-    /**
-     * Show form to creeate new User
-     *
-     * @return Illuminate\View\View
-     */
-    public function create()
-    {
-        $groups = \App\Models\Group::get();
-
-        $data = [
-            'groups' => $groups,
-        ];
-
-        return view('employees.create', $data);
     }
 }

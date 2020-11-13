@@ -19,7 +19,6 @@ class Show extends Component
     /**
      * Collection of employees.
      *
-     * @param  array  $models
      * @return \Illuminate\Database\Eloquent\Collection
      */
     public $employees;
@@ -27,7 +26,6 @@ class Show extends Component
     /**
      * Collection of groups.
      *
-     * @param  array  $models
      * @return \Illuminate\Database\Eloquent\Collection
      */
     public $groups;
@@ -35,7 +33,7 @@ class Show extends Component
     /**
      * Selected group
      *
-     * @var mixed
+     * @var string
      */
     public $group = "A";
 
@@ -83,7 +81,7 @@ class Show extends Component
     /**
      * Confirm that the admin would like to change user status.
      *
-     * @param  mixed  $user
+     * @param  integer  $id
      * @return void
      */
     public function confirmChangingStatus($id)
@@ -95,7 +93,7 @@ class Show extends Component
     /**
      * Confirm that the admin would like to change user group.
      *
-     * @param  mixed  $user
+     * @param  integer  $id
      * @return void
      */
     public function confirmChangingGroup($id)
@@ -108,7 +106,6 @@ class Show extends Component
     /**
      * Change user status
      *
-     * @param  mixed  $user
      * @return void
      */
     public function changeUserStatus()
@@ -128,7 +125,6 @@ class Show extends Component
     /**
      * Change user group
      *
-     * @param  mixed  $user
      * @return void
      */
     public function changeUserGroup()

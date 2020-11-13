@@ -47,11 +47,11 @@ trait HasGroup
      * Sync model group. Create if not assigned yet.
      *
      * @param \App\Models\Group $group;
-     * 
+     *
      * @return void
      */
     private function syncGroup($group)
-    {        
+    {
         if (!$this->group->isEmpty()) {
             $this->group()->sync($group);
         } else {
