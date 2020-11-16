@@ -31,20 +31,12 @@
                     <x-slot name="description">Tutaj możesz podejrzeć lub wgrać nowy cennik</x-slot>
                 </x-jet-section-title>
 
-                <livewire:modules.price-lists :opt="0" :module="$module" :key="opt-off"/>
-            </div>
-        </div>
-    </div>
-
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="md:grid md:grid-cols-3 md:gap-6">
-                <x-jet-section-title>
-                    <x-slot name="title">Cenniki z optymalizacją</x-slot>
-                    <x-slot name="description">Tutaj możesz podejrzeć lub wgrać nowy cennik z optymalizacją</x-slot>
-                </x-jet-section-title>
-
-                <livewire:modules.price-lists :opt="1" :module="$module" :key="opt-on"/>
+                <div class="mt-5 md:mt-0 md:col-span-2">
+                    <div class="grid grid-cols-6 gap-6">
+                        <livewire:modules.price-lists :opt="0" :module="$module" :key="opt-off"/>
+                        <livewire:modules.price-lists :opt="1" :module="$module" :key="opt-on"/>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

@@ -32,12 +32,8 @@ class Module extends Model
     /**
      * Get the module price lists.
      */
-    public function priceListByName($groupName, $opt)
+    public function priceListOpt($opt)
     {
-        foreach ($this->priceLists->where('opt', $opt) as $list) {
-            if ($list->group->first()->name == $groupName) {
-                return $list;
-            }
-        }
+       return $this->hasMany('App\Models\PriceList')->where('opt', $opt)->first();
     }
 }

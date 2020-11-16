@@ -21,18 +21,18 @@ class PriceLists extends Component
     public $cennik;
 
     /**
-     * Collection of groups.
-     *
-     * @return \Illuminate\Database\Eloquent\Collection
-     */
-    public $groups;
-
-    /**
      * The component's module.
      *
      * @var App\Models\Module
      */
     public $module;
+
+    /**
+     * The component's module price list.
+     *
+     * @var App\Models\PriceList
+     */
+    public $priceList;
 
     /**
      * Indicate if price lists are with opt prices
@@ -49,21 +49,13 @@ class PriceLists extends Component
     public $uploadList = false;
 
     /**
-     * Selected group name
-     *
-     * @var mixed
-     */
-    public $selectedGroup;
-
-    /**
      * Confirm that the admin would like to change user status.
      *
      * @param  integer  $id
      * @return void
      */
-    public function confirmUploadList($id)
+    public function confirmUploadList()
     {
-        $this->selectedGroup = $id;
         $this->uploadList = true;
     }
 
@@ -79,7 +71,7 @@ class PriceLists extends Component
     {
         $this->module = $module;
         $this->opt = $opt;
-        $this->groups = \App\Models\Group::get();
+        $this->priceList = $this->module->priceListOpt($this->opt);
     }
 
     /**
@@ -92,23 +84,19 @@ class PriceLists extends Component
         $this->validate([
             'cennik' => 'required|mimes:csv,txt|max:10240',
         ]);
-        
-        $price_list = $this->module->priceListByName($this->selectedGroup, $this->opt);
 
         // dd($this->listFile->get());
-        if (!$price_list) {
+        if (!$this->priceList) {
             $new_priceList = new \App\Models\PriceList();
             $new_priceList->opt = $this->opt;
             $new_priceList->module_id = $this->module->id;
             $new_priceList->save();
-            $price_list = $new_priceList;
+            $this->priceList = $new_priceList;
         }
 
-        $price_list->assingGroup($this->selectedGroup);
-        $price_list->touch();
+        $this->priceList->touch();
         
         $this->cennik = null;
-        $this->selectedGroup = null;
         $this->uploadList = false;
 
         $this->emit('priceListChanged');
