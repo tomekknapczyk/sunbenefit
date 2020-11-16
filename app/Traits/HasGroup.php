@@ -66,11 +66,24 @@ trait HasGroup
      *
      * @return void
      */
-    public function assingGroup($name)
+    public function assignGroup($name)
     {
         // check if group exist
         $group = $this->getGroupByName($name);
 
         $this->syncGroup($group);
+    }
+
+    /**
+     * Remove model group.
+     *
+     * @param strign $name
+     *
+     * @return void
+     */
+    public function removeGroup()
+    {
+
+        $this->group()->detach();
     }
 }

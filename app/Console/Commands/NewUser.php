@@ -40,7 +40,7 @@ class NewUser extends Command
             ]);
 
             $newUser->assignRole($this->argument('role'));
-            $newUser->assingGroup("A");
+            $newUser->assignGroup("A");
 
             $this->info('Użytkownik został utworzony');
         }

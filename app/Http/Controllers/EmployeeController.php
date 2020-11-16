@@ -24,7 +24,7 @@ class EmployeeController extends Controller
      */
     public function index()
     {
-        $employees = User::role('przedstawiciel')->withTrashed()->where('id', '!=', auth()->user()->id)->orderBy('deleted_at', 'asc')->get();
+        $employees = User::role('przedstawiciel')->withTrashed()->where('id', '!=', auth()->user()->id)->with('group')->orderBy('deleted_at', 'asc')->get();
 
         $data = [
             'employees' => $employees,

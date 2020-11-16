@@ -23,9 +23,9 @@
         </div>
 
         <!-- Description -->
-        <div class="col-span-6 sm:col-span-4">
+        <div class="col-span-6 sm:col-span-6">
             <x-jet-label for="description" value="{{ __('Description') }}" />
-            <x-jet-input id="description" type="text" class="mt-1 block w-full" wire:model.defer="description" autocomplete="description" />
+            <textarea id="description" class="mt-1 block w-full form-input rounded-md shadow-sm" wire:model.defer="description" autocomplete="description" rows="6"></textarea>
             <x-jet-input-error for="description" class="mt-2" />
         </div>
 

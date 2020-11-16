@@ -23,7 +23,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        // \App\Models\PriceList::first()->assingGroup('A');
+        // \App\Models\PriceList::first()->assignGroup('A');
         // $a = \App\Models\Module::first()->priceListsByName('A');
 
         return view('dashboard');

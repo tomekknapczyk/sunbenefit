@@ -59,7 +59,7 @@ class Create extends Component
 
         $user->assignRole('przedstawiciel');
 
-        $user->assingGroup($this->group);
+        $user->assignGroup($this->group);
 
         notify()->success('Przedstawiciel utworzony!', 'Sukces');
         

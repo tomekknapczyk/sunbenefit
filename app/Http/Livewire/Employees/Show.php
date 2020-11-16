@@ -129,7 +129,7 @@ class Show extends Component
      */
     public function changeUserGroup()
     {
-        $this->selectedUser->assingGroup($this->group);
+        $this->selectedUser->assignGroup($this->group);
         $this->changingGroup = false;
         $this->selectedUser = null;
 
