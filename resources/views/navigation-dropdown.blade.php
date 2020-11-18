@@ -15,23 +15,31 @@
                     <x-jet-nav-link href="{{ route('home') }}" :active="request()->routeIs('home')">
                         {{ __('Home') }}
                     </x-jet-nav-link>
+                    
                     @can('edit users')
                         <x-jet-nav-link href="{{ route('employees') }}" :active="request()->routeIs('employees')">
                             {{ __('Przedstawiciele') }}
                         </x-jet-nav-link>
                     @endcan
+
                     @can('edit modules')
                         <x-jet-nav-link href="{{ route('modules') }}" :active="request()->routeIs('modules')">
                             {{ __('Moduły') }}
                         </x-jet-nav-link>
                     @endcan
+
                     @can('edit surcharges')
-                        <x-jet-nav-link href="{{ route('employees') }}" :active="request()->routeIs('surcharges')">
+                        <x-jet-nav-link href="{{ route('surcharges') }}" :active="request()->routeIs('surcharges')">
                             {{ __('Dopłaty') }}
                         </x-jet-nav-link>
                     @endcan
+                    
                     <x-jet-nav-link href="{{ route('employees') }}" :active="request()->routeIs('calculations')">
                         {{ __('Wyceny') }}
+                    </x-jet-nav-link>
+
+                    <x-jet-nav-link href="{{ route('documents') }}" :active="request()->routeIs('documents')">
+                        {{ __('Pliki do pobrania') }}
                     </x-jet-nav-link>
                 </div>
             </div>

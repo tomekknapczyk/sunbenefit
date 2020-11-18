@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\ModuleController;
+use App\Http\Controllers\SurchargeController;
+use App\Http\Controllers\DocumentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,4 +32,10 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
     Route::get('/nowy-modul', [ModuleController::class, 'create'])->name('create_module')->middleware('can:create module');
     Route::get('/edycja-modulu/{module}', [ModuleController::class, 'edit'])->name('edit_module')->middleware('can:edit module');
 
+    Route::get('/doplaty', [SurchargeController::class, 'index'])->name('surcharges')->middleware('can:list surcharges');
+    Route::get('/nowa-doplata', [SurchargeController::class, 'create'])->name('create_surcharge')->middleware('can:create surcharge');
+    Route::get('/edycja-doplaty/{surcharge}', [SurchargeController::class, 'edit'])->name('edit_surcharge')->middleware('can:edit surcharge');
+
+    Route::get('/dokumenty', [DocumentController::class, 'index'])->name('documents');
+    Route::get('/nowy-dokument', [DocumentController::class, 'create'])->name('create_document')->middleware('can:create document');
 });

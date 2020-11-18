@@ -21,12 +21,12 @@
         </div>
         <div class="flex items-center justify-end flex-wrap px-2 py-3 bg-gray-50 text-right sm:px-3">
             @if($priceList)
-                <x-jet-button class="ml-2 mb-2" wire:click="showList()" wire:loading.attr="disabled">
+                <x-jet-button class="ml-2" wire:click="showList()" wire:loading.attr="disabled">
                     {{ __('Preview') }}
                 </x-jet-button>
             @endif
 
-            <x-jet-button class="ml-2 mb-2" wire:click="confirmUploadList()" wire:loading.attr="disabled">
+            <x-jet-button class="ml-2" wire:click="confirmUploadList()" wire:loading.attr="disabled">
                 {{ __('Change') }}
             </x-jet-button>
         </div>

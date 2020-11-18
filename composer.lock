@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "a0483626b9ea00ff32ebc64adf987ccb",
+    "content-hash": "3f4f11447be0498b3d37cec544b2a132",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -184,16 +184,16 @@
         },
         {
             "name": "blade-ui-kit/blade-icons",
-            "version": "0.5.0",
+            "version": "0.5.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/blade-ui-kit/blade-icons.git",
-                "reference": "6700019aa8013944520a0148d2e4e2fafdb7d970"
+                "reference": "d6bb74cdf0420900d14c6bc2304e28d0463dd0a9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/blade-ui-kit/blade-icons/zipball/6700019aa8013944520a0148d2e4e2fafdb7d970",
-                "reference": "6700019aa8013944520a0148d2e4e2fafdb7d970",
+                "url": "https://api.github.com/repos/blade-ui-kit/blade-icons/zipball/d6bb74cdf0420900d14c6bc2304e28d0463dd0a9",
+                "reference": "d6bb74cdf0420900d14c6bc2304e28d0463dd0a9",
                 "shasum": ""
             },
             "require": {
@@ -254,7 +254,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2020-10-31T19:42:11+00:00"
+            "time": "2020-11-05T20:40:53+00:00"
         },
         {
             "name": "brick/math",

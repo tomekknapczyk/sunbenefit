@@ -6,7 +6,10 @@
         </x-slot>
 
         <x-slot name="description">
-            Tutaj możesz zmienić dane modułu
+            Tutaj możesz zmienić dane modułu i jego zdjęcie
+            <div class="py-4">
+                <livewire:modules.photo :module="$module"/>
+            </div>
         </x-slot>
 
         <x-slot name="form">

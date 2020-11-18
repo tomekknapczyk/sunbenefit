@@ -18,6 +18,7 @@ class CreateModulesTable extends Migration
             $table->string('name');
             $table->integer('power');
             $table->text('description')->nullable();
+            $table->string('file_name')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

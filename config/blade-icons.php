@@ -69,6 +69,6 @@ return [
     |
     */
 
-    'class' => '',
+    'class' => 'heroicon',
 
 ];
