@@ -15,16 +15,9 @@ class CreatePriceListsTable extends Migration
     {
         Schema::create('price_lists', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('module_id');
+            $table->foreignId('module_id')->index()->constrained()->onDelete('cascade');
             $table->boolean('opt')->default(0);
             $table->timestamps();
-
-            $table->index('module_id');
-
-            $table->foreign('module_id')
-                ->references('id')
-                ->on('modules')
-                ->onDelete('cascade');
         });
     }
 

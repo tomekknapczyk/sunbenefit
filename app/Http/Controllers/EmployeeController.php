@@ -48,4 +48,22 @@ class EmployeeController extends Controller
 
         return view('employees.create', $data);
     }
+
+    /**
+     * Show form to edit User calculator
+     *
+     * @return Illuminate\View\View
+     */
+    public function calculator()
+    {
+        $modules = \App\Models\Module::get();
+        $surcharges = \App\Models\Surcharge::where('editable', 1)->get();
+
+        $data = [
+            'modules' => $modules,
+            'surcharges' => $surcharges,
+        ];
+
+        return view('employees.calculator', $data);
+    }
 }

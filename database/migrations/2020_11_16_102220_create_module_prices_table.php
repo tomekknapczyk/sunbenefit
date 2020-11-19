@@ -15,19 +15,11 @@ class CreateModulePricesTable extends Migration
     {
         Schema::create('module_prices', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('price_list_id');
+            $table->foreignId('price_list_id')->index()->constrained()->onDelete('cascade');
             $table->decimal('price', 9, 2);
             $table->string('power');
-            $table->integer('qty');
+            $table->integer('qty')->index();
             $table->timestamps();
-
-            $table->index('price_list_id');
-            $table->index('qty');
-
-            $table->foreign('price_list_id')
-                ->references('id')
-                ->on('price_lists')
-                ->onDelete('cascade');
         });
     }
 

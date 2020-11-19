@@ -66,4 +66,28 @@ class User extends Authenticatable
     protected $appends = [
         'profile_photo_url',
     ];
+
+    /**
+     * Get the calculator configuration
+     */
+    public function calculator()
+    {
+        return $this->hasOne('App\Models\Calculator');
+    }
+
+    /**
+     * Get the user surcharges
+     */
+    public function surcharges()
+    {
+        return $this->hasMany('App\Models\UserSurcharge');
+    }
+
+    /**
+     * Get the user surcharge
+     */
+    public function getSurcharge($id)
+    {
+        return $this->surcharges->where('id', $id)->first();
+    }
 }

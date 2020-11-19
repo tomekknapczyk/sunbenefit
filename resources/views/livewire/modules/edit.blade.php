@@ -1,5 +1,5 @@
 <div>
-    <p class="font-black text-2xl mb-5">{{ $module->name}}</p>
+    <p class="font-black text-2xl mb-5 dark:text-gray-400">{{ $module->name}}</p>
     <x-jet-form-section submit="saveModule">
         <x-slot name="title">
             Dane modułu

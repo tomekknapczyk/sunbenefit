@@ -38,11 +38,11 @@
         <div class="col-span-6 sm:col-span-4">
             <x-jet-label value="{{ __('Edytowalna przez pracownika') }}" />
             <div class="flex items-center mt-2">
-                <input type="radio" id="editable_yes" wire:model="editable" name="editable" class="appearance-none h-3 w-3 border border-gray-400 rounded-full checked:bg-gray-900 checked:border-transparent focus:outline-none" value="1" />
+                <input type="radio" id="editable_yes" wire:model.defer="editable" name="editable" class="appearance-none h-3 w-3 border border-gray-400 rounded-full checked:bg-gray-900 dark:checked:bg-gray-100 checked:border-transparent focus:outline-none" value="1" />
                 <x-jet-label for="editable_yes" value="{{ __('Yes') }}" class="pl-1 leading-none" />
             </div>
             <div class="flex items-center mt-2">
-                <input type="radio" id="editable_no" wire:model="editable" name="editable" class="appearance-none h-3 w-3 border border-gray-400 rounded-full checked:bg-gray-900 checked:border-transparent focus:outline-none" value="0" />
+                <input type="radio" id="editable_no" wire:model.defer="editable" name="editable" class="appearance-none h-3 w-3 border border-gray-400 rounded-full checked:bg-gray-900 dark:checked:bg-gray-100 checked:border-transparent focus:outline-none" value="0" />
                 <x-jet-label for="editable_no" value="{{ __('No') }}" class="pl-1 leading-none" />
             </div>
             <x-jet-input-error for="editable" class="mt-2" />

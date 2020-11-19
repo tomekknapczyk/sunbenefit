@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <div class="flex items-center justify-start flex-wrap">
-            <h2 class="font-semibold text-xl text-gray-800 leading-tight mr-4">
+            <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-400 leading-tight mr-4">
                 {{ __('Edycja modułu') }}
             </h2>
 

@@ -60,6 +60,25 @@ class Show extends Component
             $this->selectedModule->restore();
         } else {
             $this->selectedModule->delete();
+            
+            $calcs_1 = \App\Models\Calculator::where('module_id_1', $this->selectedModule->id)->get();
+            $calcs_2 = \App\Models\Calculator::where('module_id_2', $this->selectedModule->id)->get();
+            $calcs_3 = \App\Models\Calculator::where('module_id_3', $this->selectedModule->id)->get();
+            
+            foreach($calcs_1 as $calc){
+                $calc->module_id_1 = null;
+                $calc->save();
+            }
+
+            foreach($calcs_2 as $calc){
+                $calc->module_id_2 = null;
+                $calc->save();
+            }
+
+            foreach($calcs_3 as $calc){
+                $calc->module_id_3 = null;
+                $calc->save();
+            }
         }
 
         $this->changingStatus = false;

@@ -1,13 +1,13 @@
 <div class="col-span-6 sm:col-span-3">
     <div class="shadow overflow-hidden sm:rounded-md">
-        <div class="px-2 py-3 sm:px-3 bg-white">
+        <div class="px-2 py-3 sm:px-3 bg-white  dark:bg-gray-900">
             @if($opt)
-                <p class="text-lg font-bold">Z optymalizacją</p>
+                <p class="text-lg font-bold dark:text-gray-400">Z optymalizacją</p>
             @else
-                <p class="text-lg font-bold">Bez optymalizacji</p>
+                <p class="text-lg font-bold dark:text-gray-400">Bez optymalizacji</p>
             @endif
             <div class="flex items-center mt-2">
-                <x-heroicon-o-clipboard-list class="w-12 h-12 mr-2"/>
+                <x-heroicon-o-clipboard-list class="w-12 h-12 mr-2 dark:text-gray-400"/>
                 @if($priceList)
                     <p class="text-sm text-gray-400">
                         {{ $priceList->updated_at->format('d-m-Y H:i:s') }}
@@ -19,7 +19,7 @@
                 @endif
             </div>
         </div>
-        <div class="flex items-center justify-end flex-wrap px-2 py-3 bg-gray-50 text-right sm:px-3">
+        <div class="flex items-center justify-end flex-wrap px-2 py-3 bg-gray-50 dark:bg-gray-800 text-right sm:px-3">
             @if($priceList)
                 <x-jet-button class="ml-2" wire:click="showList()" wire:loading.attr="disabled">
                     {{ __('Preview') }}
@@ -82,9 +82,9 @@
             {{ __('Cennik') }}
 
             @if($opt)
-                <p class="text-gray-500 text-sm">z optymalizacją</p>
+                <p class="text-gray-500 text-sm dark:text-gray-300">z optymalizacją</p>
             @else
-                <p class="text-gray-500 text-sm">bez optymalizacji</p>
+                <p class="text-gray-500 text-sm dark:text-gray-300">bez optymalizacji</p>
             @endif
         </x-slot>
 
@@ -95,14 +95,14 @@
                     <x-slot name="thead">
                         <tr>
                             @foreach($groups as $group)
-                                <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
+                                <th class="px-6 py-3 bg-gray-50 dark:bg-gray-800 text-left text-xs leading-4 font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
                                     Grupa {{ $group->name }}
                                 </th>
                             @endforeach
-                            <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
+                            <th class="px-6 py-3 bg-gray-50 dark:bg-gray-800 text-left text-xs leading-4 font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
                                 Moc
                             </th>
-                            <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
+                            <th class="px-6 py-3 bg-gray-50 dark:bg-gray-800 text-left text-xs leading-4 font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
                                 Ilość
                             </th>
                         </tr>
@@ -112,14 +112,14 @@
                         @foreach($priceTable as $key => $price)
                             <tr>
                                 @foreach($groups as $group)
-                                    <td class="px-6 py-2 whitespace-no-wrap text-xs">
+                                    <td class="px-6 py-2 whitespace-no-wrap text-xs dark:text-gray-400">
                                         {{ $price['price_'.$group->name] }}
                                     </td>
                                 @endforeach
-                                <td class="px-6 py-2 whitespace-no-wrap text-xs">
+                                <td class="px-6 py-2 whitespace-no-wrap text-xs dark:text-gray-400">
                                     {{ $price['power'] }}
                                 </td>
-                                <td class="px-6 py-2 whitespace-no-wrap text-xs">
+                                <td class="px-6 py-2 whitespace-no-wrap text-xs dark:text-gray-400">
                                     {{ $price['qty'] }}
                                 </td>
                             </tr>

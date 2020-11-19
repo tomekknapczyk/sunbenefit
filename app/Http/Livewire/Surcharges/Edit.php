@@ -19,7 +19,7 @@ class Edit extends Component
     /**
      * The component's surcharge.
      *
-     * @var Surcharge
+     * @var \App\Models\Surcharge
      */
     public $surcharge;
 
@@ -48,6 +48,10 @@ class Edit extends Component
         $this->surcharge->type = $this->type;
         $this->surcharge->editable = $this->editable;
         $this->surcharge->save();
+
+        if ($this->editable == 0) {
+            \App\Models\UserSurcharge::where('surcharge_id', $this->surcharge->id)->delete();
+        }
 
         $this->emit('saved');
     }
