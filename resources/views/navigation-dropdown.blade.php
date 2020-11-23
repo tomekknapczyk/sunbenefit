@@ -34,7 +34,7 @@
                         </x-jet-nav-link>
                     @endcan
                     
-                    <x-jet-nav-link href="{{ route('employees') }}" :active="request()->routeIs('calculations')">
+                    <x-jet-nav-link href="{{ route('calculations') }}" :active="request()->routeIs('calculations')">
                         {{ __('Wyceny') }}
                     </x-jet-nav-link>
 

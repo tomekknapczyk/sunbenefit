@@ -10,6 +10,7 @@ button{
 @screen dark {
 
     input[type="text"],
+    input[type="number"],
     select.form-select,
     textarea.form-input{
         @apply bg-gray-600;

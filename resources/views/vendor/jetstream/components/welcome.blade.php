@@ -9,7 +9,7 @@
 </div>
 
 <div class="grid grid-cols-1 md:grid-cols-2">
-    <a href="{{ route('login') }}" class="hover:bg-gray-100 dark:hover:bg-gray-800">
+    <a href="{{ route('create_calculation') }}" class="hover:bg-gray-100 dark:hover:bg-gray-800">
         <div class="p-6 text-green-700 dark:text-green-500">
             <div class="flex items-center">
                 <x-heroicon-o-adjustments class="w-8 h-8"/>
@@ -49,7 +49,7 @@
         </div>
     </a>
 
-    <a href="{{ route('profile.show') }}" class="hover:bg-gray-100 dark:hover:bg-gray-800">
+    <a href="{{ route('calculations') }}" class="hover:bg-gray-100 dark:hover:bg-gray-800">
         <div class="p-6 border-gray-200 dark:border-gray-700 md:border-t text-green-700 dark:text-green-500">
             <div class="flex items-center">
                 <x-heroicon-o-collection class="w-8 h-8"/>

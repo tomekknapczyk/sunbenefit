@@ -17,7 +17,7 @@ class CreateSurchargesTable extends Migration
             $table->id();
             $table->string('name');
             $table->decimal('price', 9, 2);
-            $table->string('type')->default('module'); // module / once / kwp
+            $table->string('type')->default('module'); // module / once / kwp / unit
             $table->boolean('editable')->default(false);
             $table->timestamps();
         });

@@ -10,7 +10,7 @@ class UserSurcharge extends Model
     use HasFactory;
 
     /**
-     * Get thesurcharge user
+     * Get the surcharge user
      */
     public function user()
     {

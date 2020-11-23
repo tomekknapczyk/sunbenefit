@@ -104,5 +104,17 @@
     "No": "Nie",
     "Calculator configuration": "Konfiguracja kalkulatora",
     "Module": "Moduł",
-    "Margin": "Marża"
+    "Margin": "Marża",
+    "Company": "Firma",
+    "Optional": "Opcjonalnie",
+    "Address": "Adres",
+    "Zip code": "Kod pocztowy",
+    "City": "Miasto",
+    "Yearly Consumption": "Roczne zużycie",
+    "Monthly fees": "Miesięczne rachunki",
+    "Perfect PV power": "Idealna moc PV",
+    "PV power": "Moc elektrowni",
+    "Self deposit": "Wpłata własna",
+    "Number of years": "Ilość lat",
+    "Quantity": "Ilość"
 }

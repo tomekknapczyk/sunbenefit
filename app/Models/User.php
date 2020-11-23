@@ -90,4 +90,12 @@ class User extends Authenticatable
     {
         return $this->surcharges->where('id', $id)->first();
     }
+
+    /**
+     * Get the user calculations
+     */
+    public function calculations()
+    {
+        return $this->hasMany('App\Models\Calculation');
+    }
 }
