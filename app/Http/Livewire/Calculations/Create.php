@@ -16,7 +16,7 @@ class Create extends Component
     /**
      * User calculator.
      *
-     * @return \Illuminate\Database\Eloquent\Collection
+     * @return \App\Models\Calculator
      */
     public $calculator;
 
@@ -36,6 +36,7 @@ class Create extends Component
 
     public $consumption = 4000;
     public $fees = 250;
+    public $pv_power = 0;
 
     /**
      * Form factors
@@ -130,6 +131,16 @@ class Create extends Component
         }
 
         return 0;
+    }
+
+    /**
+     * Calculates perfect power of PV based on consumption
+     *
+     * @return void $this->perfectPower
+     */
+    public function calcPrice()
+    {
+        $this->emit('calcPrice', $this->pv_power);
     }
 
     public function updated($propertyName)

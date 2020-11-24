@@ -135,7 +135,7 @@
                             <!-- PV power -->
                             <div class="col-span-6 sm:col-span-3">
                                 <x-jet-label for="pv_power" value="{{ __('PV power') }}" />
-                                <x-jet-input id="pv_power" type="text" class="mt-1 block w-full" wire:model.lazy="pv_power" />
+                                <x-jet-input id="pv_power" type="text" class="mt-1 block w-full" wire:model="pv_power" wire:keyup='calcPrice' />
                                 <x-jet-input-error for="pv_power" class="mt-2" />
                             </div>
 
@@ -213,12 +213,7 @@
             <div class="col-span-3 sm:col-span-1">
                 <label for="selected_module1" class="flex items-center p-3 rounded-lg cursor-pointer {{ $selected_module == 1 ? 'bg-green-600' : '' }}"">
                     <input type="radio" wire:model="selected_module" name="selected_module" value="1" id="selected_module1" class="hidden">
-                    <div class="col-span-3 sm:col-span-1 w-full bg-gray-400 p-4 rounded-sm">
-                        <p>{{ $this->calculator->module1->name }}</p>
-                        @if($this->calculator->module1->file_name)
-                            <img src="{{ asset('storage/photos/' . $this->calculator->module1->file_name) }}" class="w-full h-auto mb-2">
-                        @endif
-                    </div>
+                    <livewire:calculations.module :module="$this->calculator->module1" :margin="$this->calculator->margin_1"/>
                 </label>
             </div>
         @endif
@@ -227,12 +222,7 @@
             <div class="col-span-3 sm:col-span-1">
                 <label for="selected_module2" class="flex items-center p-3 rounded-lg cursor-pointer {{ $selected_module == 2 ? 'bg-green-600' : '' }}"">
                     <input type="radio" wire:model="selected_module" name="selected_module" value="2" id="selected_module2" class="hidden">
-                    <div class="col-span-3 sm:col-span-1 w-full bg-gray-400 p-4 rounded-sm">
-                        <p>{{ $this->calculator->module2->name }}</p>
-                        @if($this->calculator->module2->file_name)
-                            <img src="{{ asset('storage/photos/' . $this->calculator->module2->file_name) }}" class="w-full h-auto mb-2">
-                        @endif
-                    </div>
+                    <livewire:calculations.module :module="$this->calculator->module2" :margin="$this->calculator->margin_2"/>
                 </label>
             </div>
         @endif
@@ -241,9 +231,7 @@
             <div class="col-span-3 sm:col-span-1">
                 <label for="selected_module3" class="flex items-center">
                     <input type="radio" wire:model="selected_module" name="selected_module" value="3" id="selected_module3">
-                    <div class="col-span-3 sm:col-span-1">
-                        <p>{{ $this->calculator->module3->name }}</p>
-                    </div>
+                    <livewire:calculations.module :module="$this->calculator->module3" :margin="$this->calculator->margin_3"/>
                 </label>
             </div>
         @endif
