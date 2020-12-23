@@ -71,6 +71,8 @@ class Create extends Component
     public $selectedKwp = 0;
     public $selectedQty = 0;
     public $selectedPrice = 0;
+    public $selectedPower = 0;
+    public $selectedWarranty = 0;
 
     public $financingMethod;
 
@@ -301,9 +303,11 @@ class Create extends Component
     public function updateSelectedInfo($data)
     {
         $this->selectedPrice = $data[0];
-        $this->selectedKwp = $data[1];
+        $this->selectedPower = $data[1];
         $this->selectedQty = $data[2];
         $this->selectedName = $data[3];
+        $this->selectedKwp = $data[4];
+        $this->selectedWarranty = $data[5];
     }
 
     public function updated($propertyName)
@@ -323,12 +327,18 @@ class Create extends Component
         
                 return back();
             }
+
+            \Storage::delete('wyceny/'. $edited->code . '.pdf');
+            \Storage::delete('protokoly/'. $edited->code . '.pdf');
+            \Storage::delete('opisy/'. $edited->code . '.pdf');
             
             $edited->delete();
         }
 
+        $code = 'wycena_' . time();
+
         $calculation = \App\Models\Calculation::create([
-            'code' => "wycena ".time(),
+            'code' => $code,
             'user_id' => auth()->user()->id,
             'status' => 1,
             'name' => $this->name,
@@ -350,13 +360,27 @@ class Create extends Component
             'options' => $this->options,
             'financing_method' => $this->financingMethod,
             'final_price' => $this->selectedPrice,
+            'final_power' => $this->selectedPower,
             'module_id' => $this->selectedModule,
             'module_name' => $this->selectedName,
             'module_power' => $this->selectedKwp,
             'module_qty' => $this->selectedQty,
+            'module_warranty' => $this->selectedWarranty,
             'calc_surcharges' => $this->calcSurcharges,
             'calc_surcharges_qty' => $this->calcSurchargesQty,
         ]);
+
+        $pdf = \PDF::loadView('pdf.agreement', compact('calculation'))->setPaper([0, 0, 595.28, 841.89], 'portrait');
+
+        \Storage::put('wyceny/' . $code . '.pdf', $pdf->output());
+
+        $pdf = \PDF::loadView('pdf.protokol', compact('calculation'))->setPaper([0, 0, 595.28, 841.89], 'portrait');
+
+        \Storage::put('protokoly/' . $code . '.pdf', $pdf->output());
+
+        $pdf = \PDF::loadView('pdf.opis', compact('calculation'))->setPaper([0, 0, 595.28, 841.89], 'portrait');
+
+        \Storage::put('opisy/' . $code . '.pdf', $pdf->output());
         
         notify()->success('Wycena została zapisana!', 'Sukces');
         

@@ -42,4 +42,10 @@ class DocumentController extends Controller
     {
         return view('documents.create');
     }
+
+    public function getDocument($filename){
+        $url = storage_path('app/documents/'.$filename);
+
+        return response()->file($url);
+    }
 }

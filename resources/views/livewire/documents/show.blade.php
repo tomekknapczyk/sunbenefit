@@ -20,7 +20,7 @@
                         <div class="text-xl leading-5 text-gray-900 dark:text-gray-400">{{ $document->name }}</div>
                     </td>
                     <td class="px-6 py-4 whitespace-no-wrap text-right text-sm leading-5 font-medium">
-                        <a href="{{ asset('storage/documents/' . $document->file_name) }}" target="_blank" class="ml-2 inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25">
+                        <a href="{{ route('getDocument', $document->file_name) }}" target="_blank" class="ml-2 inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25">
                             Pobierz
                         </a>
                         @can('delete document')

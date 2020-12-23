@@ -49,10 +49,12 @@ class CreateCalculationsTable extends Migration
             $table->decimal('options', 9, 2);
             $table->string('financing_method');
             $table->decimal('final_price', 9, 2);
+            $table->string('final_power');
             $table->foreignId('module_id');
             $table->string('module_name');
             $table->string('module_power');
             $table->string('module_qty');
+            $table->string('module_warranty');
             $table->json('calc_surcharges');
             $table->json('calc_surcharges_qty');
             $table->timestamps();

@@ -113,4 +113,36 @@ class CalculationController extends Controller
 
         return view('calculations.edit', $data);
     }
+
+    public function getAgreement($filename){
+        $url = storage_path('app/wyceny/'.$filename);
+
+        return response()->file($url);
+    }
+
+    public function getDesc($filename){
+        $url = storage_path('app/opisy/'.$filename);
+
+        return response()->file($url);
+    }
+
+    public function getProtocol($filename){
+        $url = storage_path('app/protokoly/'.$filename);
+
+        return response()->file($url);
+    }
+
+    public function test()
+    {
+        $calculation = \App\Models\Calculation::where('id', 7)->first();
+
+        $data = [
+            'calculation' => $calculation
+        ];
+
+        // $pdf = \PDF::loadView('pdf.agreement', $data)->setPaper([0, 0, 595.28, 841.89], 'portrait');
+        // $pdf = \PDF::loadView('pdf.opis', $data)->setPaper([0, 0, 595.28, 841.89], 'portrait');
+        $pdf = \PDF::loadView('pdf.protokol', $data)->setPaper([0, 0, 595.28, 841.89], 'portrait');
+        return $pdf->stream();
+    }
 }

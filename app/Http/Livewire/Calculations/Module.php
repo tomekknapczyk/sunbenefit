@@ -108,7 +108,7 @@ class Module extends Component
         $this->refreshPrice();
         $this->selected = true;
         $this->emit('selected_id:update', $this->nr);
-        $this->emit('selected:update', [$this->price, $this->actual_power, $this->qty, $this->module->name]);
+        $this->emit('selected:update', [$this->price, $this->actual_power, $this->qty, $this->module->name, $this->module->power, $this->module->warranty]);
     }
 
     public function updateId($id)
@@ -192,7 +192,7 @@ class Module extends Component
         $this->calcInstallment();
 
         if ($this->selected) {
-            $this->emit('selected:update', [$this->price, $this->actual_power, $this->qty, $this->module->name]);
+            $this->emit('selected:update', [$this->price, $this->actual_power, $this->qty, $this->module->name, $this->module->power, $this->module->warranty]);
         }
     }
 

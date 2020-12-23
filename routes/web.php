@@ -45,12 +45,19 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
 
     Route::get('/dokumenty', [DocumentController::class, 'index'])->name('documents');
     Route::get('/nowy-dokument', [DocumentController::class, 'create'])->name('create_document')->middleware('can:create document');
+    Route::get('/pobierz-dokument/{filename}', [DocumentController::class, 'getDocument'])->name('getDocument');
 
     Route::get('/zalaczniki', [AttachmentController::class, 'index'])->name('attachments');
     Route::get('/nowy-zalacznik', [AttachmentController::class, 'create'])->name('create_attachment')->middleware('can:create attachment');
+    Route::get('/pobierz-zalacznik/{filename}', [AttachmentController::class, 'getAttachment'])->name('getAttachment');
 
     Route::get('/wyceny', [CalculationController::class, 'index'])->name('calculations');
     Route::get('/nowa-wycena', [CalculationController::class, 'create'])->name('create_calculation');
     Route::get('/edycja-wyceny/{calculation}', [CalculationController::class, 'edit'])->name('edit_calculation');
     Route::get('/lista-wycen', [CalculationController::class, 'all'])->name('all_calculations');
+    Route::get('/pobierz-umowe/{filename}', [CalculationController::class, 'getAgreement'])->name('getAgreement');
+    Route::get('/pobierz-opis/{filename}', [CalculationController::class, 'getDesc'])->name('getDesc');
+    Route::get('/pobierz-protokol/{filename}', [CalculationController::class, 'getProtocol'])->name('getProtocol');
+
+    Route::get('/test', [CalculationController::class, 'test'])->name('test'); // tesdt pdfa
 });

@@ -42,4 +42,10 @@ class AttachmentController extends Controller
     {
         return view('attachments.create');
     }
+
+    public function getAttachment($filename){
+        $url = storage_path('app/attachments/'.$filename);
+
+        return response()->file($url);
+    }
 }

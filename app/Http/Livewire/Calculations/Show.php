@@ -13,6 +13,12 @@ class Show extends Component
      */
     public $calculations;
 
+    public $attachments;
+
+    public function mount()
+    {
+        $this->attachments = \App\Models\Attachment::get();
+    }
 
     public function render()
     {
