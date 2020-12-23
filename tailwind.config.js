@@ -14,8 +14,19 @@ module.exports = {
             },
             screens: {
                 'dark': {'raw': '(prefers-color-scheme: dark)'},
-            }
+            },
+            maxHeight: {
+                '80vh': '80vh',
+                '90vh': '90vh',
+            },
         },
+        screens: {
+            'sm': '640px',
+            'md': '768px',
+            'lg': '1024px',
+            'xl': '1280px',
+            '2xl': '1536px',
+        }
     },
 
     variants: {

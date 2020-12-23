@@ -33,11 +33,12 @@
                 @livewire('profile.logout-other-browser-sessions-form')
             </div>
 
+            @can('delete account')
             <x-jet-section-border />
-
-            <div class="mt-10 sm:mt-0">
-                @livewire('profile.delete-user-form')
-            </div>
+                <div class="mt-10 sm:mt-0">
+                    @livewire('profile.delete-user-form')
+                </div>
+            @endcan
         </div>
     </div>
 </x-app-layout>

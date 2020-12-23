@@ -88,7 +88,40 @@ class User extends Authenticatable
      */
     public function getSurcharge($id)
     {
-        return $this->surcharges->where('id', $id)->first();
+        return $this->surcharges->where('surcharge_id', $id)->first();
+    }
+
+    /**
+     * Get the user factors
+     */
+    public function factors()
+    {
+        return $this->hasMany('App\Models\UserFactor');
+    }
+
+    /**
+     * Get the user factor
+     */
+    public function getFactor($id)
+    {
+        return $this->factors->where('factor_id', $id)->first();
+    }
+
+    /**
+     * Get the user factor by name
+     */
+    public function getFactorByName($name)
+    {
+        $factor =\App\Models\Factor::where('name', $name)->first();
+
+        $userFactor = $this->getFactor($factor->id);
+        
+        if ($userFactor) {
+            $userFactor['label'] = $factor['label'];
+            return $userFactor;
+        }
+
+        return $factor;
     }
 
     /**

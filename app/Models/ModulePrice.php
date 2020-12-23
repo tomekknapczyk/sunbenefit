@@ -18,4 +18,15 @@ class ModulePrice extends Model
     {
         return $this->belongsTo('App\Models\PriceList');
     }
+
+    /**
+     * Set the power.
+     *
+     * @param  string  $value
+     * @return void
+     */
+    public function setPowerAttribute($value)
+    {
+        $this->attributes['power'] = str_replace(',', '.', $value);
+    }
 }

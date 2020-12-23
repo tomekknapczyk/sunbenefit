@@ -7,6 +7,8 @@ use App\Http\Controllers\ModuleController;
 use App\Http\Controllers\SurchargeController;
 use App\Http\Controllers\DocumentController;
 use App\Http\Controllers\CalculationController;
+use App\Http\Controllers\FactorController;
+use App\Http\Controllers\AttachmentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -38,10 +40,17 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
     Route::get('/nowa-doplata', [SurchargeController::class, 'create'])->name('create_surcharge')->middleware('can:create surcharge');
     Route::get('/edycja-doplaty/{surcharge}', [SurchargeController::class, 'edit'])->name('edit_surcharge')->middleware('can:edit surcharge');
 
+    Route::get('/wspolczynniki', [FactorController::class, 'index'])->name('factors')->middleware('can:list factors');
+    Route::get('/edycja-wspolczynnika/{factor}', [FactorController::class, 'edit'])->name('edit_factor')->middleware('can:edit factors');
+
     Route::get('/dokumenty', [DocumentController::class, 'index'])->name('documents');
     Route::get('/nowy-dokument', [DocumentController::class, 'create'])->name('create_document')->middleware('can:create document');
+
+    Route::get('/zalaczniki', [AttachmentController::class, 'index'])->name('attachments');
+    Route::get('/nowy-zalacznik', [AttachmentController::class, 'create'])->name('create_attachment')->middleware('can:create attachment');
 
     Route::get('/wyceny', [CalculationController::class, 'index'])->name('calculations');
     Route::get('/nowa-wycena', [CalculationController::class, 'create'])->name('create_calculation');
     Route::get('/edycja-wyceny/{calculation}', [CalculationController::class, 'edit'])->name('edit_calculation');
+    Route::get('/lista-wycen', [CalculationController::class, 'all'])->name('all_calculations');
 });

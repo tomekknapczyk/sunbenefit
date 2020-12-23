@@ -79,6 +79,12 @@
                 <x-jet-input-error for="margin_3" class="mt-2" />
             </div>
         </div>
+
+        <div class="col-span-6">
+            <x-jet-action-message class="mr-3 text-white bg-red-400 p-2 rounded" on="modulesFail">
+                {{ __('Nie można wybrać dwóch takich samych modułów.') }}
+            </x-jet-action-message>
+        </div>
     </x-slot>
 
     <x-slot name="actions">

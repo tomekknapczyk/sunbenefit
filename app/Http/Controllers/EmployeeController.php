@@ -58,10 +58,12 @@ class EmployeeController extends Controller
     {
         $modules = \App\Models\Module::get();
         $surcharges = \App\Models\Surcharge::where('editable', 1)->get();
+        $factors = \App\Models\Factor::where('editable', 1)->get();
 
         $data = [
             'modules' => $modules,
             'surcharges' => $surcharges,
+            'factors' => $factors,
         ];
 
         return view('employees.calculator', $data);

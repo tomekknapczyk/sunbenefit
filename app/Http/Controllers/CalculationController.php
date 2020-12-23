@@ -18,23 +18,41 @@ class CalculationController extends Controller
     }
 
     /**
-     * Show calculations list
+     * Show user calculations list
      *
+     *
+     * @param  \Illuminate\Http\Request  $request
      * @return Illuminate\View\View
      */
-    public function index()
+    public function index(Request $request)
     {
-        if ($this->authorize('list-all', Calculation::class)) {
-            $calculations = Calculation::get();
-        } else {
-            $calculations = Calculation::where('user_id', auth()->user()->id)->get();
-        }
+        $calculations = Calculation::where('user_id', auth()->user()->id)->get();
 
         $data = [
             'calculations' => $calculations,
         ];
 
         return view('calculations.index', $data);
+    }
+
+    /**
+     * Show all calculations list
+     *
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return Illuminate\View\View
+     */
+    public function all(Request $request)
+    {
+        $this->authorize('list-all', Calculation::class);
+
+        $calculations = Calculation::get();
+
+        $data = [
+            'calculations' => $calculations,
+        ];
+
+        return view('calculations.all', $data);
     }
 
     /**
@@ -55,6 +73,7 @@ class CalculationController extends Controller
         
             return back();
         }
+        
         $surcharges = \App\Models\Surcharge::get();
 
         $data = [
@@ -71,8 +90,25 @@ class CalculationController extends Controller
      */
     public function edit(Calculation $calculation)
     {
+        $surcharges = \App\Models\Surcharge::get();
+
+        if($calculation->getRawOriginal('status') != 1){
+            notify()->error('Nie można edytować wybranej wyceny', 'Błąd');
+        
+            return back();
+        }
+
+        // $calculator = auth()->user()->calculator()->first();
+
+        // if($calculation->module_id !== $calculator->module_id_1 && $calculation->module_id !== $calculator->module_id_2 && $calculation->module_id !== $calculator->module_id_3){
+        //     notify()->error('W kalkulatorze nie masz dostępnego modułu '.$calculation->module_name.'!', 'Błąd');
+        
+        //     return back();
+        // }
+
         $data = [
             'calculation' => $calculation,
+            'surcharges' => $surcharges,
         ];
 
         return view('calculations.edit', $data);

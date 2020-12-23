@@ -11,6 +11,12 @@ class Create extends Component
     public $power;
     public $description;
 
+    protected $messages = [
+        'power.required' => 'Moc jest wymagana.',
+        'name.required' => 'Nazwa jest wymagana.',
+        'power.numeric' => 'Moc musi być liczbą',
+    ];
+
     /**
      * Validate and create a new module.
      *

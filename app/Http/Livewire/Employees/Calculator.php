@@ -74,15 +74,19 @@ class Calculator extends Component
             $calculator->user_id = auth()->user()->id;
         }
 
-        $calculator->margin_1 = $this->margin_1;
-        $calculator->margin_2 = $this->margin_2;
-        $calculator->margin_3 = $this->margin_3;
-        $calculator->module_id_1 = $this->module_1;
-        $calculator->module_id_2 = $this->module_2;
-        $calculator->module_id_3 = $this->module_3;
-        $calculator->save();
+        if ($this->module_1 != $this->module_2 && $this->module_1 != $this->module_3 && $this->module_2 != $this->module_3) {
+            $calculator->margin_1 = $this->margin_1;
+            $calculator->margin_2 = $this->margin_2;
+            $calculator->margin_3 = $this->margin_3;
+            $calculator->module_id_1 = $this->module_1;
+            $calculator->module_id_2 = $this->module_2;
+            $calculator->module_id_3 = $this->module_3;
+            $calculator->save();
 
-        $this->emit('modulesChanged');
+            $this->emit('modulesChanged');
+        } else {
+            $this->emit('modulesFail');
+        }        
     }
 
     /**

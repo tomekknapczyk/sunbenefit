@@ -16,9 +16,18 @@ class CreateModulesTable extends Migration
         Schema::create('modules', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->integer('power');
-            $table->text('description')->nullable();
+            $table->string('warranty')->nullable();
             $table->string('file_name')->nullable();
+            $table->text('description')->nullable();
+            $table->integer('power');
+            $table->integer('length')->nullable();
+            $table->integer('width')->nullable();
+            $table->integer('frame')->nullable();
+            $table->decimal('efficiency', 9, 2)->nullable();
+            $table->decimal('performance', 9, 2)->nullable();
+            $table->decimal('pmax', 9, 2)->nullable();
+            $table->decimal('mpower', 9, 2)->nullable();
+            $table->decimal('area', 9, 2)->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

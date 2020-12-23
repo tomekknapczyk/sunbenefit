@@ -1,6 +1,6 @@
 <nav x-data="{ open: false }" class="bg-white dark:bg-gray-900 border-b border-gray-100  dark:border-gray-800">
     <!-- Primary Navigation Menu -->
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="max-w-7xl mx-auto px-4 lg:px-6 lg:px-8">
         <div class="flex justify-between h-16">
             <div class="flex">
                 <!-- Logo -->
@@ -11,32 +11,20 @@
                 </div>
 
                 <!-- Navigation Links -->
-                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                <div class="hidden space-x-8 lg:-my-px lg:ml-10 lg:flex">
                     <x-jet-nav-link href="{{ route('home') }}" :active="request()->routeIs('home')">
                         {{ __('Home') }}
                     </x-jet-nav-link>
                     
-                    @can('edit users')
-                        <x-jet-nav-link href="{{ route('employees') }}" :active="request()->routeIs('employees')">
-                            {{ __('Przedstawiciele') }}
-                        </x-jet-nav-link>
-                    @endcan
-
-                    @can('edit modules')
-                        <x-jet-nav-link href="{{ route('modules') }}" :active="request()->routeIs('modules')">
-                            {{ __('Moduły') }}
-                        </x-jet-nav-link>
-                    @endcan
-
-                    @can('edit surcharges')
-                        <x-jet-nav-link href="{{ route('surcharges') }}" :active="request()->routeIs('surcharges')">
-                            {{ __('Dopłaty') }}
-                        </x-jet-nav-link>
-                    @endcan
-                    
                     <x-jet-nav-link href="{{ route('calculations') }}" :active="request()->routeIs('calculations')">
-                        {{ __('Wyceny') }}
+                        {{ __('Moje wyceny') }}
                     </x-jet-nav-link>
+
+                    @can('list-all', Calculation::class)
+                        <x-jet-nav-link href="{{ route('all_calculations') }}" :active="request()->routeIs('all_calculations')">
+                            {{ __('Lista wycen') }}
+                        </x-jet-nav-link>
+                    @endcan
 
                     <x-jet-nav-link href="{{ route('documents') }}" :active="request()->routeIs('documents')">
                         {{ __('Pliki do pobrania') }}
@@ -45,7 +33,7 @@
             </div>
 
             <!-- Settings Dropdown -->
-            <div class="hidden sm:flex sm:items-center sm:ml-6">
+            <div class="hidden lg:flex lg:items-center lg:ml-6">
                 <x-jet-dropdown align="right" width="48">
                     <x-slot name="trigger">
                         @if (Laravel\Jetstream\Jetstream::managesProfilePhotos())
@@ -66,6 +54,41 @@
                     </x-slot>
 
                     <x-slot name="content">
+                        @can('edit users')
+                            <div class="block px-4 py-2 text-xs text-gray-400">
+                                {{ __('Manage calculator') }}
+                            </div>
+                            <x-jet-dropdown-link href="{{ route('employees') }}" :active="request()->routeIs('employees')">
+                                {{ __('Przedstawiciele') }}
+                            </x-jet-dropdown-link>
+                        @endcan
+
+                        @can('edit modules')
+                            <x-jet-dropdown-link href="{{ route('modules') }}" :active="request()->routeIs('modules')">
+                                {{ __('Moduły') }}
+                            </x-jet-dropdown-link>
+                        @endcan
+
+                        @can('edit surcharges')
+                            <x-jet-dropdown-link href="{{ route('surcharges') }}" :active="request()->routeIs('surcharges')">
+                                {{ __('Dopłaty') }}
+                            </x-jet-dropdown-link>
+                        @endcan
+
+                        @can('edit factors')
+                            <x-jet-dropdown-link href="{{ route('factors') }}" :active="request()->routeIs('factors')">
+                                {{ __('Współczynniki') }}
+                            </x-jet-dropdown-link>
+                        @endcan
+                        
+                        @can('edit attachments')
+                            <x-jet-dropdown-link href="{{ route('attachments') }}" :active="request()->routeIs('attachments')">
+                                {{ __('Załączniki') }}
+                            </x-jet-dropdown-link>
+                        @endcan
+
+                        <div class="border-t border-gray-100"></div>
+
                         <!-- Account Management -->
                         <div class="block px-4 py-2 text-xs text-gray-400">
                             {{ __('Manage Account') }}
@@ -79,44 +102,7 @@
                             {{ __('Calculator configuration') }}
                         </x-jet-dropdown-link>
 
-                        @if (Laravel\Jetstream\Jetstream::hasApiFeatures())
-                            <x-jet-dropdown-link href="{{ route('api-tokens.index') }}">
-                                {{ __('API Tokens') }}
-                            </x-jet-dropdown-link>
-                        @endif
-
                         <div class="border-t border-gray-100"></div>
-
-                        <!-- Team Management -->
-                        @if (Laravel\Jetstream\Jetstream::hasTeamFeatures())
-                            <div class="block px-4 py-2 text-xs text-gray-400">
-                                {{ __('Manage Team') }}
-                            </div>
-
-                            <!-- Team Settings -->
-                            <x-jet-dropdown-link href="{{ route('teams.show', Auth::user()->currentTeam->id) }}">
-                                {{ __('Team Settings') }}
-                            </x-jet-dropdown-link>
-
-                            @can('create', Laravel\Jetstream\Jetstream::newTeamModel())
-                                <x-jet-dropdown-link href="{{ route('teams.create') }}">
-                                    {{ __('Create New Team') }}
-                                </x-jet-dropdown-link>
-                            @endcan
-
-                            <div class="border-t border-gray-100"></div>
-
-                            <!-- Team Switcher -->
-                            <div class="block px-4 py-2 text-xs text-gray-400">
-                                {{ __('Switch Teams') }}
-                            </div>
-
-                            @foreach (Auth::user()->allTeams() as $team)
-                                <x-jet-switchable-team :team="$team" />
-                            @endforeach
-
-                            <div class="border-t border-gray-100"></div>
-                        @endif
 
                         <!-- Authentication -->
                         <form method="POST" action="{{ route('logout') }}">
@@ -133,7 +119,7 @@
             </div>
 
             <!-- Hamburger -->
-            <div class="-mr-2 flex items-center sm:hidden">
+            <div class="-mr-2 flex items-center lg:hidden">
                 <button @click="open = ! open" class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 focus:text-gray-500 transition duration-150 ease-in-out">
                     <svg class="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
                         <path :class="{'hidden': open, 'inline-flex': ! open }" class="inline-flex" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
@@ -145,80 +131,82 @@
     </div>
 
     <!-- Responsive Navigation Menu -->
-    <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
+    <div :class="{'block': open, 'hidden': ! open}" class="hidden lg:hidden">
         <div class="pt-2 pb-3 space-y-1">
             <x-jet-responsive-nav-link href="{{ route('home') }}" :active="request()->routeIs('home')">
                 {{ __('Home') }}
             </x-jet-responsive-nav-link>
-        </div>
 
-        <!-- Responsive Settings Options -->
-        <div class="pt-4 pb-1 border-t border-gray-200">
-            <div class="flex items-center px-4">
-                @if (Laravel\Jetstream\Jetstream::managesProfilePhotos())
-                <div class="flex-shrink-0 mr-3">
-                    <img class="h-10 w-10 rounded-full" src="{{ Auth::user()->profile_photo_url }}" alt="{{ Auth::user()->name }}" />
+            <x-jet-responsive-nav-link href="{{ route('calculations') }}" :active="request()->routeIs('calculations')">
+                {{ __('Moje wyceny') }}
+            </x-jet-responsive-nav-link>
+
+            @can('list-all', Calculation::class)
+                <x-jet-responsive-nav-link href="{{ route('all_calculations') }}" :active="request()->routeIs('all_calculations')">
+                    {{ __('Lista wycen') }}
+                </x-jet-responsive-nav-link>
+            @endcan
+
+            <x-jet-responsive-nav-link href="{{ route('documents') }}" :active="request()->routeIs('documents')">
+                {{ __('Pliki do pobrania') }}
+            </x-jet-responsive-nav-link>
+
+            @can('edit users')
+                <div class="block px-4 py-2 text-xs text-gray-400">
+                    {{ __('Manage calculator') }}
                 </div>
-                @endif
+                <x-jet-responsive-nav-link href="{{ route('employees') }}" :active="request()->routeIs('employees')">
+                    {{ __('Przedstawiciele') }}
+                </x-jet-responsive-nav-link>
+            @endcan
 
-                <div>
-                    <div class="font-medium text-base text-gray-800">{{ Auth::user()->name }}</div>
-                    <div class="font-medium text-sm text-gray-500">{{ Auth::user()->email }}</div>
+            @can('edit modules')
+                <x-jet-responsive-nav-link href="{{ route('modules') }}" :active="request()->routeIs('modules')">
+                    {{ __('Moduły') }}
+                </x-jet-responsive-nav-link>
+            @endcan
+
+            @can('edit surcharges')
+                <x-jet-responsive-nav-link href="{{ route('surcharges') }}" :active="request()->routeIs('surcharges')">
+                    {{ __('Dopłaty') }}
+                </x-jet-responsive-nav-link>
+            @endcan
+
+            @can('edit factors')
+                <x-jet-responsive-nav-link href="{{ route('factors') }}" :active="request()->routeIs('factors')">
+                    {{ __('Współczynniki') }}
+                </x-jet-responsive-nav-link>
+            @endcan
+            
+            @can('edit attachments')
+                <x-jet-responsive-nav-link href="{{ route('attachments') }}" :active="request()->routeIs('attachments')">
+                    {{ __('Załączniki') }}
+                </x-jet-responsive-nav-link>
+            @endcan
+                <div class="block px-4 py-2 text-xs text-gray-400">
+                    {{ __('Manage Account') }}
                 </div>
-            </div>
 
-            <div class="mt-3 space-y-1">
-                <!-- Account Management -->
                 <x-jet-responsive-nav-link href="{{ route('profile.show') }}" :active="request()->routeIs('profile.show')">
                     {{ __('Profile') }}
                 </x-jet-responsive-nav-link>
 
-                @if (Laravel\Jetstream\Jetstream::hasApiFeatures())
-                    <x-jet-responsive-nav-link href="{{ route('api-tokens.index') }}" :active="request()->routeIs('api-tokens.index')">
-                        {{ __('API Tokens') }}
-                    </x-jet-responsive-nav-link>
-                @endif
+                <x-jet-responsive-nav-link href="{{ route('calculator') }}" :active="request()->routeIs('calculator')">
+                    {{ __('Calculator configuration') }}
+                </x-jet-responsive-nav-link>
 
-                <!-- Authentication -->
-                <form method="POST" action="{{ route('logout') }}">
-                    @csrf
+                <div class="space-y-1">
+                    <!-- Authentication -->
+                    <form method="POST" action="{{ route('logout') }}">
+                        @csrf
 
-                    <x-jet-responsive-nav-link href="{{ route('logout') }}"
-                                    onclick="event.preventDefault();
-                                                this.closest('form').submit();">
-                        {{ __('Logout') }}
-                    </x-jet-responsive-nav-link>
-                </form>
-
-                <!-- Team Management -->
-                @if (Laravel\Jetstream\Jetstream::hasTeamFeatures())
-                    <div class="border-t border-gray-200"></div>
-
-                    <div class="block px-4 py-2 text-xs text-gray-400">
-                        {{ __('Manage Team') }}
-                    </div>
-
-                    <!-- Team Settings -->
-                    <x-jet-responsive-nav-link href="{{ route('teams.show', Auth::user()->currentTeam->id) }}" :active="request()->routeIs('teams.show')">
-                        {{ __('Team Settings') }}
-                    </x-jet-responsive-nav-link>
-
-                    <x-jet-responsive-nav-link href="{{ route('teams.create') }}" :active="request()->routeIs('teams.create')">
-                        {{ __('Create New Team') }}
-                    </x-jet-responsive-nav-link>
-
-                    <div class="border-t border-gray-200"></div>
-
-                    <!-- Team Switcher -->
-                    <div class="block px-4 py-2 text-xs text-gray-400">
-                        {{ __('Switch Teams') }}
-                    </div>
-
-                    @foreach (Auth::user()->allTeams() as $team)
-                        <x-jet-switchable-team :team="$team" component="jet-responsive-nav-link" />
-                    @endforeach
-                @endif
+                        <x-jet-responsive-nav-link href="{{ route('logout') }}"
+                                        onclick="event.preventDefault();
+                                                    this.closest('form').submit();">
+                            {{ __('Logout') }}
+                        </x-jet-responsive-nav-link>
+                    </form>
+                </div>
             </div>
-        </div>
     </div>
 </nav>

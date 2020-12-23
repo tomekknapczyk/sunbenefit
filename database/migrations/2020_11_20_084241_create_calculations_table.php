@@ -6,6 +6,18 @@ use Illuminate\Support\Facades\Schema;
 
 class CreateCalculationsTable extends Migration
 {
+    // Statusy:
+    // 1. Umowa podpisana przez handlowca
+    // 2. Umowa dostarczona do BOK
+    // 3. Umowa zaakceptowana przez BOK
+    // 4. Umowa „przekazana do Zamówienia”
+    // 5. Potwierdzenie wysyłki towarów
+    // 6. Towar dostarczono
+    // 7. Montaż wykonany
+    // 8. Zakończenie umowy
+    // 9. Umowa do archiwum
+
+
     /**
      * Run the migrations.
      *
@@ -17,6 +29,7 @@ class CreateCalculationsTable extends Migration
             $table->id();
             $table->string('code')->index();
             $table->foreignId('user_id')->index();
+            $table->integer('status')->default(1)->index();
             $table->string('name');
             $table->string('address');
             $table->string('zip_code');
@@ -27,24 +40,21 @@ class CreateCalculationsTable extends Migration
             $table->string('invest_address');
             $table->string('invest_zip_code');
             $table->string('invest_city');
-            $table->integer('consuption');
-            $table->integer('pv_power');
+            $table->boolean('company')->default(0);
+            $table->boolean('same_place')->default(1);
+            $table->decimal('pv_power', 9, 2);
+            $table->decimal('deposit', 9, 2)->nullable();
+            $table->integer('years')->nullable();
+            $table->boolean('solar')->default(0);
+            $table->decimal('options', 9, 2);
+            $table->string('financing_method');
+            $table->decimal('final_price', 9, 2);
             $table->foreignId('module_id');
-            $table->string('module');
+            $table->string('module_name');
             $table->string('module_power');
-            $table->integer('qty');
-            $table->string('calc_power');
-            $table->timestamps();
-        });
-
-        Schema::create('calculations_surcharges', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('calculation_id')->index()->constrained()->onDelete('cascade');
-            $table->foreignId('surcharge_id')->index();
-            $table->string('name');
-            $table->decimal('price', 9, 2);
-            $table->string('type')->default('module'); // module / once / kwp / unit
-            $table->decimal('calc_price');
+            $table->string('module_qty');
+            $table->json('calc_surcharges');
+            $table->json('calc_surcharges_qty');
             $table->timestamps();
         });
     }

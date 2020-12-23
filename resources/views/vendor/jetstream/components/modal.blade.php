@@ -3,7 +3,7 @@
 @php
 $id = $id ?? md5($attributes->wire('model'));
 
-switch ($maxWidth ?? '2xl') {
+switch ($maxWidth ?? '4xl') {
     case 'sm':
         $maxWidth = 'sm:max-w-sm';
         break;
@@ -17,8 +17,17 @@ switch ($maxWidth ?? '2xl') {
         $maxWidth = 'sm:max-w-xl';
         break;
     case '2xl':
-    default:
         $maxWidth = 'sm:max-w-2xl';
+        break;
+    case '3xl':
+        $maxWidth = 'sm:max-w-3xl';
+        break;
+    case '5xl':
+        $maxWidth = 'sm:max-w-5xl';
+        break;
+    case '4xl':
+    default:
+        $maxWidth = 'sm:max-w-4xl';
         break;
 }
 @endphp
@@ -59,7 +68,7 @@ switch ($maxWidth ?? '2xl') {
         <div class="absolute inset-0 bg-gray-500 opacity-75"></div>
     </div>
 
-    <div x-show="show" class="bg-white dark:bg-gray-700 rounded-lg overflow-hidden shadow-xl transform transition-all sm:w-full {{ $maxWidth }}"
+    <div x-show="show" class="bg-white dark:bg-gray-700 rounded-lg shadow-xl transform transition-all sm:w-full {{ $maxWidth }} max-h-90vh overflow-auto"
                     x-transition:enter="ease-out duration-300"
                     x-transition:enter-start="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
                     x-transition:enter-end="opacity-100 translate-y-0 sm:scale-100"
