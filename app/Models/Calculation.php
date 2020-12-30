@@ -108,6 +108,22 @@ class Calculation extends Model
     }
 
     /**
+     * Get the calculation surcharges
+     */
+    public function surcharges()
+    {
+        return $this->hasMany('App\Models\CalculationSurcharge');
+    }
+
+    /**
+     * Get the calculation aum
+     */
+    public function aum()
+    {
+        return $this->hasOne('App\Models\Aum');
+    }
+
+    /**
      * Get the user's first name.
      *
      * @param  string  $value

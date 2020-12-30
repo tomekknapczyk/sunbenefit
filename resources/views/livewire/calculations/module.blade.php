@@ -68,37 +68,39 @@
                 {{ $installment }} zł
             </p>
         </div>
-        <div class="grid grid-cols-5 gap-2 items-center bg-gray-50 dark:bg-gray-800 py-1 px-2 text-gray-700 dark:text-gray-300">
-            <p class="text-sm col-span-3">
-                {{ $dotation->label }}:
-            </p>
-            <p class="text-lg col-span-2">
-                {{ $price_with_dotation }} zł
-            </p>
-        </div>
-        <div class="grid grid-cols-5 gap-2 items-center bg-gray-300 dark:bg-gray-700 py-1 px-2 text-gray-700 dark:text-gray-300">
-            <p class="text-sm col-span-3">
-                Rata:
-            </p>
-            <p class="text-lg col-span-2">
-                {{ $installment2 }} zł
-            </p>
-        </div>
-        <div class="grid grid-cols-5 gap-2 items-center bg-gray-50 dark:bg-gray-800 py-1 px-2 text-gray-700 dark:text-gray-300">
-            <p class="text-sm col-span-3">
-                {{ $tax_relief->label }}:
-            </p>
-            <p class="text-lg col-span-2">
-                {{ $price_with_relief }} zł
-            </p>
-        </div>
-        <div class="grid grid-cols-5 gap-2 items-center bg-gray-300 dark:bg-gray-700 py-1 px-2 text-gray-700 dark:text-gray-300">
-            <p class="text-sm col-span-3">
-                Rata końcowa:
-            </p>
-            <p class="text-lg col-span-2">
-                {{ $installment_final }} zł
-            </p>
-        </div>
+        @if(!$company)
+            <div class="grid grid-cols-5 gap-2 items-center bg-gray-50 dark:bg-gray-800 py-1 px-2 text-gray-700 dark:text-gray-300">
+                <p class="text-sm col-span-3">
+                    {{ $dotation->label }}:
+                </p>
+                <p class="text-lg col-span-2">
+                    {{ $price_with_dotation }} zł
+                </p>
+            </div>
+            <div class="grid grid-cols-5 gap-2 items-center bg-gray-300 dark:bg-gray-700 py-1 px-2 text-gray-700 dark:text-gray-300">
+                <p class="text-sm col-span-3">
+                    Rata:
+                </p>
+                <p class="text-lg col-span-2">
+                    {{ $installment2 }} zł
+                </p>
+            </div>
+            <div class="grid grid-cols-5 gap-2 items-center bg-gray-50 dark:bg-gray-800 py-1 px-2 text-gray-700 dark:text-gray-300">
+                <p class="text-sm col-span-3">
+                    {{ $tax_relief->label }}:
+                </p>
+                <p class="text-lg col-span-2">
+                    {{ $price_with_relief }} zł
+                </p>
+            </div>
+            <div class="grid grid-cols-5 gap-2 items-center bg-gray-300 dark:bg-gray-700 py-1 px-2 text-gray-700 dark:text-gray-300">
+                <p class="text-sm col-span-3">
+                    Rata końcowa:
+                </p>
+                <p class="text-lg col-span-2">
+                    {{ $installment_final }} zł
+                </p>
+            </div>
+        @endif
     </div>
 </div>

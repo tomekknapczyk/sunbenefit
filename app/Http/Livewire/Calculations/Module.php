@@ -88,7 +88,7 @@ class Module extends Component
                 } elseif ($surcharge['type'] == 'module') {
                     $sum += $price * $this->qty;
                 } else {
-                    $sum += $price * $this->calcSurchargesQty[$surcharge['id']];
+                    $sum += $price * \is_numeric($this->calcSurchargesQty[$surcharge['id']])?$this->calcSurchargesQty[$surcharge['id']]:0;
                 }
             }
         }

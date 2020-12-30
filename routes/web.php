@@ -54,10 +54,12 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
     Route::get('/wyceny', [CalculationController::class, 'index'])->name('calculations');
     Route::get('/nowa-wycena', [CalculationController::class, 'create'])->name('create_calculation');
     Route::get('/edycja-wyceny/{calculation}', [CalculationController::class, 'edit'])->name('edit_calculation');
+    Route::get('/edycja-aum/{calculation}', [CalculationController::class, 'editAum'])->name('edit_calculation_aum');
     Route::get('/lista-wycen', [CalculationController::class, 'all'])->name('all_calculations');
     Route::get('/pobierz-umowe/{filename}', [CalculationController::class, 'getAgreement'])->name('getAgreement');
     Route::get('/pobierz-opis/{filename}', [CalculationController::class, 'getDesc'])->name('getDesc');
     Route::get('/pobierz-protokol/{filename}', [CalculationController::class, 'getProtocol'])->name('getProtocol');
+    Route::get('/pobierz-aum/{filename}', [CalculationController::class, 'getAum'])->name('getAum');
 
     Route::get('/test', [CalculationController::class, 'test'])->name('test'); // tesdt pdfa
 });

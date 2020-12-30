@@ -30,12 +30,18 @@
                     </td>
                     <td class="px-6 py-4">
                         <p>{{ $calculation->status }}</p>
-                        <p>({{ $calculation->user->name }})</p>
+                        <p>{{ $calculation->created_at->format('d.m.Y') }} ({{ $calculation->user->name }})</p>
                     </td>
                     <td class="px-6 py-4 text-right text-sm leading-5 font-medium max-w-xs">
                         @if($calculation->getRawOriginal('status') == 1)
                             <a href="{{ route('edit_calculation', $calculation) }}" class="ml-2 mb-2 inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25">
                                 Edytuj
+                            </a>
+                        @endif
+
+                        @if($calculation->getRawOriginal('status') == 1)
+                            <a href="{{ route('edit_calculation_aum', $calculation) }}" class="ml-2 mb-2 inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25">
+                                Edytuj Aum
                             </a>
                         @endif
                     </td>
@@ -51,7 +57,7 @@
                                 Opis Techniczny
                             </a>
 
-                            <a href="{{ route('getAgreement', $calculation->code.'.pdf') }}" target="_blank" class="inline-flex items-center px-2 py-1 bg-gray-200 dark:bg-gray-800 border border-transparent rounded-md text-xs text-black dark:text-gray-200 hover:bg-gray-400 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25">
+                            <a href="{{ route('getAum', $calculation->code.'.pdf') }}" target="_blank" class="inline-flex items-center px-2 py-1 bg-gray-200 dark:bg-gray-800 border border-transparent rounded-md text-xs text-black dark:text-gray-200 hover:bg-gray-400 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25">
                                 AUM
                             </a>
 

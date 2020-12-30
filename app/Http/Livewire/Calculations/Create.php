@@ -331,6 +331,7 @@ class Create extends Component
             \Storage::delete('wyceny/'. $edited->code . '.pdf');
             \Storage::delete('protokoly/'. $edited->code . '.pdf');
             \Storage::delete('opisy/'. $edited->code . '.pdf');
+            \Storage::delete('aum/'. $edited->code . '.pdf');
             
             $edited->delete();
         }
@@ -370,17 +371,27 @@ class Create extends Component
             'calc_surcharges_qty' => $this->calcSurchargesQty,
         ]);
 
-        $pdf = \PDF::loadView('pdf.agreement', compact('calculation'))->setPaper([0, 0, 595.28, 841.89], 'portrait');
+        \App\Models\Aum::create([
+            'calculation_id' => $calculation->id,
+        ]);
 
-        \Storage::put('wyceny/' . $code . '.pdf', $pdf->output());
+        foreach ($this->surcharges as $surcharge) {
+            if ($this->calcSurcharges[$surcharge['id']]) {
+                $qty = 1;
 
-        $pdf = \PDF::loadView('pdf.protokol', compact('calculation'))->setPaper([0, 0, 595.28, 841.89], 'portrait');
+                if ($surcharge['type'] == 'unit') {
+                    $qty = $this->calcSurchargesQty[$surcharge['id']];
+                }
 
-        \Storage::put('protokoly/' . $code . '.pdf', $pdf->output());
-
-        $pdf = \PDF::loadView('pdf.opis', compact('calculation'))->setPaper([0, 0, 595.28, 841.89], 'portrait');
-
-        \Storage::put('opisy/' . $code . '.pdf', $pdf->output());
+                \App\Models\CalculationSurcharge::create([
+                    'calculation_id' => $calculation->id,
+                    'surcharge_id' => $surcharge['id'],
+                    'name' => $surcharge['name'],
+                    'type' => $surcharge['type'],
+                    'qty' => $qty,
+                ]);
+            }
+        }
         
         notify()->success('Wycena została zapisana!', 'Sukces');
         

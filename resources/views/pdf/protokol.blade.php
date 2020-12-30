@@ -7,7 +7,7 @@
         header { position: fixed; top: -85px; left: 0px; right: 0px;}
         footer { position: fixed; bottom: -40px; left: 0px; right: 0px; }
         footer .pagenum:before {content: counter(page);}
-        html {font-size: 12px;}
+        html {font-size: 11px;}
         body {font-family: DejaVu Sans;font-weight: 400;color: #000;padding: 0;margin: 0;font-size: 1rem;width: 100%;}
         
 

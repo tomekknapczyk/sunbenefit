@@ -343,6 +343,7 @@
                                             type="checkbox"
                                             class="form-checkbox"
                                             wire:model="calcSurcharges.{{ $surcharge->id }}"
+                                            wire:click='calcSurcharges'
                                         >
                                         <span class="ml-2 text-sm text-gray-600 dark:text-gray-400">{{ __('Yes') }}</span>
                                     </label>
@@ -353,6 +354,7 @@
                                         <x-jet-input type="number"
                                             class="mt-1 block w-full"
                                             wire:model="calcSurchargesQty.{{ $surcharge->id }}"
+                                            wire:keyup.debounce.100ms='calcSurcharges'
                                         />
                                         <x-jet-input-error for="calcSurchargesQty.{{ $surcharge->id }}" class="mt-2" />
                                     </div>
@@ -363,7 +365,7 @@
                         <x-jet-section-border />
                     @endforeach
 
-                    <div class="flex items-center justify-end">
+                    {{-- <div class="flex items-center justify-end">
                         <div class="flex items-center justify-end">
                             <x-jet-action-message class="mr-3 text-white bg-green-200 p-2 rounded" on="applied">
                                 {{ __('Saved.') }}
@@ -373,7 +375,7 @@
                                 {{ __('Apply') }}
                             </x-jet-button>
                         </div>
-                    </div>
+                    </div> --}}
                 </x-slot>
             </x-modal>
 
@@ -483,6 +485,13 @@
                         </div>
                     </div>
                 </div>
+            </div>
+        </div>
+
+        <div wire:loading wire:target="saveCalculation" class="p-5 bg-white dark:bg-gray-900 w-full mt-5">
+            <div class="flex items-center justify-center text-center flex-col">
+                <span class="text-2xl text-gray-600 dark:text-gray-400">Zapisuję...</span>
+                <div class="lds-facebook"><div></div><div></div><div></div></div>
             </div>
         </div>
 

@@ -26,7 +26,7 @@ class CalculationController extends Controller
      */
     public function index(Request $request)
     {
-        $calculations = Calculation::where('user_id', auth()->user()->id)->get();
+        $calculations = Calculation::where('user_id', auth()->user()->id)->latest()->get();
 
         $data = [
             'calculations' => $calculations,
@@ -46,7 +46,7 @@ class CalculationController extends Controller
     {
         $this->authorize('list-all', Calculation::class);
 
-        $calculations = Calculation::get();
+        $calculations = Calculation::latest()->get();
 
         $data = [
             'calculations' => $calculations,
@@ -98,14 +98,6 @@ class CalculationController extends Controller
             return back();
         }
 
-        // $calculator = auth()->user()->calculator()->first();
-
-        // if($calculation->module_id !== $calculator->module_id_1 && $calculation->module_id !== $calculator->module_id_2 && $calculation->module_id !== $calculator->module_id_3){
-        //     notify()->error('W kalkulatorze nie masz dostępnego modułu '.$calculation->module_name.'!', 'Błąd');
-        
-        //     return back();
-        // }
-
         $data = [
             'calculation' => $calculation,
             'surcharges' => $surcharges,
@@ -114,8 +106,48 @@ class CalculationController extends Controller
         return view('calculations.edit', $data);
     }
 
+    /**
+     * Show calculation aum edit form
+     *
+     * @return Illuminate\View\View
+     */
+    public function editAum(Calculation $calculation)
+    {
+        if($calculation->getRawOriginal('status') != 1){
+            notify()->error('Nie można edytować wybranej wyceny', 'Błąd');
+        
+            return back();
+        }
+
+        $data = [
+            'calculation' => $calculation
+        ];
+
+        return view('calculations.edit-aum', $data);
+    }
+
     public function getAgreement($filename){
         $url = storage_path('app/wyceny/'.$filename);
+
+        $exists = \Storage::disk('local')->exists('wyceny/'.$filename);
+
+        if (!$exists) {
+            $calculation_code = \explode('.',$filename);
+            $calculation = \App\Models\Calculation::where('code', $calculation_code[0])->first();
+
+            if (!$calculation) {
+                notify()->error('Nie można pobrać wyceny', 'Błąd');
+                return back();
+            }
+
+            $data = [
+                'calculation' => $calculation
+            ];
+
+            $pdf = \PDF::loadView('pdf.agreement', $data)->setPaper([0, 0, 595.28, 841.89], 'portrait');
+
+            \Storage::put('wyceny/'.$filename, $pdf->output());
+        }   
 
         return response()->file($url);
     }
@@ -123,18 +155,84 @@ class CalculationController extends Controller
     public function getDesc($filename){
         $url = storage_path('app/opisy/'.$filename);
 
+        $exists = \Storage::disk('local')->exists('opisy/'.$filename);
+
+        if (!$exists) {
+            $calculation_code = \explode('.', $filename);
+            $calculation = \App\Models\Calculation::where('code', $calculation_code[0])->first();
+
+            if (!$calculation) {
+                notify()->error('Nie można pobrać opisu', 'Błąd');
+                return back();
+            }
+
+            $data = [
+                'calculation' => $calculation
+            ];
+
+            $pdf = \PDF::loadView('pdf.opis', $data)->setPaper([0, 0, 595.28, 841.89], 'portrait');
+
+            \Storage::put('opisy/'.$filename, $pdf->output());
+        }
+
         return response()->file($url);
     }
 
     public function getProtocol($filename){
         $url = storage_path('app/protokoly/'.$filename);
 
+        $exists = \Storage::disk('local')->exists('protokoly/'.$filename);
+
+        if (!$exists) {
+            $calculation_code = \explode('.', $filename);
+            $calculation = \App\Models\Calculation::where('code', $calculation_code[0])->first();
+
+            if (!$calculation) {
+                notify()->error('Nie można pobrać protokołu', 'Błąd');
+                return back();
+            }
+
+            $data = [
+                'calculation' => $calculation
+            ];
+
+            $pdf = \PDF::loadView('pdf.protokol', $data)->setPaper([0, 0, 595.28, 841.89], 'portrait');
+
+            \Storage::put('protokoly/'.$filename, $pdf->output());
+        }
+
+        return response()->file($url);
+    }
+
+    public function getAum($filename){
+        $url = storage_path('app/aum/'.$filename);
+
+        $exists = \Storage::disk('local')->exists('aum/'.$filename);
+
+        if (!$exists) {
+            $calculation_code = \explode('.',$filename);
+            $calculation = \App\Models\Calculation::where('code', $calculation_code[0])->with('aum')->first();
+
+            if (!$calculation) {
+                notify()->error('Nie można pobrać arkusza', 'Błąd');
+                return back();
+            }
+
+            $data = [
+                'calculation' => $calculation
+            ];
+
+            $pdf = \PDF::loadView('pdf.aum', $data)->setPaper([0, 0, 595.28, 841.89], 'portrait');
+
+            \Storage::put('aum/'.$filename, $pdf->output());
+        }   
+
         return response()->file($url);
     }
 
     public function test()
     {
-        $calculation = \App\Models\Calculation::where('id', 7)->first();
+        $calculation = \App\Models\Calculation::where('id', 26)->with('aum', 'user')->first();
 
         $data = [
             'calculation' => $calculation
@@ -142,7 +240,8 @@ class CalculationController extends Controller
 
         // $pdf = \PDF::loadView('pdf.agreement', $data)->setPaper([0, 0, 595.28, 841.89], 'portrait');
         // $pdf = \PDF::loadView('pdf.opis', $data)->setPaper([0, 0, 595.28, 841.89], 'portrait');
-        $pdf = \PDF::loadView('pdf.protokol', $data)->setPaper([0, 0, 595.28, 841.89], 'portrait');
+        // $pdf = \PDF::loadView('pdf.protokol', $data)->setPaper([0, 0, 595.28, 841.89], 'portrait');
+        $pdf = \PDF::loadView('pdf.aum', $data)->setPaper([0, 0, 595.28, 841.89], 'portrait');
         return $pdf->stream();
     }
 }

@@ -274,7 +274,7 @@
                 <li>Sprzęt wchodzący w skład Instalacji Fotowoltaicznej objęty jest gwarancją jego producentów:
                     <ol>
                         <li>okres gwarancji producenta na panele fotowoltaiczne wynosi: <strong>{{ $calculation->module_warranty }}</strong></li>
-                        <li>okres gwarancji producenta na falownik wynosi: <strong>....... lat</strong></li>
+                        <li>okres gwarancji producenta na falownik wynosi: <strong>{{ $calculation->solar?'12':'10'}} lat</strong></li>
                     </ol>
                 </li>
                 <li>SUNBENEFIT udziela Klientowi <strong>24 miesięcznej</strong> gwarancji na wykonane prace montażowe oraz materiały wykorzystane przy budowie Instalacji Fotowoltaicznej. Gwarancja na wykonane prace montażowe oraz materiały dotyczy odpowiedzialności SUNBENEFIT z tytułu wad tkwiących w użytych materiałach, z tytułu wadliwego wykonania prac i obejmuje szkody rzeczywiste z wyłączeniem utraconych korzyści powstałych w związku z wystąpieniem wady.</li>
