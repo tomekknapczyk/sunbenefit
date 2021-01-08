@@ -3,6 +3,9 @@
         <x-slot name="thead">
             <tr>
                 <th class="px-6 py-3 bg-gray-50 dark:bg-gray-800 text-left text-xs leading-4 font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
+                    Kod
+                </th>
+                <th class="px-6 py-3 bg-gray-50 dark:bg-gray-800 text-left text-xs leading-4 font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
                     Imię i nazwisko /<br>
                     Adres inwestycji
                 </th>
@@ -19,6 +22,9 @@
         <x-slot name="tbody">
             @foreach($calculations as $calculation)
                 <tr class="text-sm text-gray-900 dark:text-gray-400">
+                    <td class="px-6 py-4 ">
+                        <p>{{ $calculation->code }}</p>
+                    </td>
                     <td class="px-6 py-4 ">
                         <p>{{ $calculation->name }}</p>
                         <p class="text-xs">{{ $calculation->invest_address }}</p>
@@ -47,21 +53,21 @@
                     </td>
                 </tr>
                 <tr class="bg-gray-300 dark:bg-gray-600">
-                    <td colspan="4">
+                    <td colspan="5">
                         <div class="p-1 space-x-1 text-right">
-                            <a href="{{ route('getAgreement', $calculation->code.'.pdf') }}" target="_blank" class="inline-flex items-center px-2 py-1 bg-gray-200 dark:bg-gray-800 border border-transparent rounded-md text-xs text-black dark:text-gray-200 hover:bg-gray-400 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25">
+                            <a href="{{ route('getAgreement', $calculation->code_slug().'.pdf') }}" target="_blank" class="inline-flex items-center px-2 py-1 bg-gray-200 dark:bg-gray-800 border border-transparent rounded-md text-xs text-black dark:text-gray-200 hover:bg-gray-400 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25">
                                 Umowa
                             </a>
 
-                            <a href="{{ route('getDesc', $calculation->code.'.pdf') }}" target="_blank" class="inline-flex items-center px-2 py-1 bg-gray-200 dark:bg-gray-800 border border-transparent rounded-md text-xs text-black dark:text-gray-200 hover:bg-gray-400 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25">
+                            <a href="{{ route('getDesc', $calculation->code_slug().'.pdf') }}" target="_blank" class="inline-flex items-center px-2 py-1 bg-gray-200 dark:bg-gray-800 border border-transparent rounded-md text-xs text-black dark:text-gray-200 hover:bg-gray-400 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25">
                                 Opis Techniczny
                             </a>
 
-                            <a href="{{ route('getAum', $calculation->code.'.pdf') }}" target="_blank" class="inline-flex items-center px-2 py-1 bg-gray-200 dark:bg-gray-800 border border-transparent rounded-md text-xs text-black dark:text-gray-200 hover:bg-gray-400 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25">
+                            <a href="{{ route('getAum', $calculation->code_slug().'.pdf') }}" target="_blank" class="inline-flex items-center px-2 py-1 bg-gray-200 dark:bg-gray-800 border border-transparent rounded-md text-xs text-black dark:text-gray-200 hover:bg-gray-400 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25">
                                 AUM
                             </a>
 
-                            <a href="{{ route('getProtocol', $calculation->code.'.pdf') }}" target="_blank" class="inline-flex items-center px-2 py-1 bg-gray-200 dark:bg-gray-800 border border-transparent rounded-md text-xs text-black dark:text-gray-200 hover:bg-gray-400 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25">
+                            <a href="{{ route('getProtocol', $calculation->code_slug().'.pdf') }}" target="_blank" class="inline-flex items-center px-2 py-1 bg-gray-200 dark:bg-gray-800 border border-transparent rounded-md text-xs text-black dark:text-gray-200 hover:bg-gray-400 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25">
                                 Protokół Odbioru
                             </a>
 

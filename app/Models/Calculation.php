@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Str;
 
 class Calculation extends Model
 {
@@ -221,7 +222,7 @@ class Calculation extends Model
     }
 
     public function slownie($int)
-    {        
+    {
         $in = preg_replace('/[^-\d]+/', '', $int);
         $out = '';
         
@@ -248,5 +249,10 @@ class Calculation extends Model
             }
         }
         return trim($out);
+    }
+
+    public function code_slug()
+    {
+        return Str::of($this->code)->replace('/', '_');
     }
 }

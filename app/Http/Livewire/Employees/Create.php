@@ -12,6 +12,7 @@ class Create extends Component
     use PasswordValidationRules;
 
     public $groups;
+    public $code;
     public $name;
     public $lastname;
     public $phone;
@@ -23,6 +24,7 @@ class Create extends Component
     public function updated($propertyName)
     {
         $this->validateOnly($propertyName, [
+            'code' => ['nullable', 'string', 'max:255'],
             'name' => ['required', 'string', 'max:255'],
             'lastname' => ['required', 'string', 'max:255'],
             'phone' => ['nullable', 'string', 'max:255'],
@@ -41,6 +43,7 @@ class Create extends Component
     public function createUser()
     {
         $validatedData = $this->validate([
+            'code' => ['nullable', 'string', 'max:255'],
             'name' => ['required', 'string', 'max:255'],
             'lastname' => ['required', 'string', 'max:255'],
             'phone' => ['nullable', 'string', 'max:255'],
@@ -50,6 +53,7 @@ class Create extends Component
         ]);
 
         $user = User::create([
+            'kod' => $this->code,
             'name' => $this->name,
             'lastname' => $this->lastname,
             'phone' => $this->phone,

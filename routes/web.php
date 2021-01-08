@@ -61,5 +61,5 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
     Route::get('/pobierz-protokol/{filename}', [CalculationController::class, 'getProtocol'])->name('getProtocol');
     Route::get('/pobierz-aum/{filename}', [CalculationController::class, 'getAum'])->name('getAum');
 
-    Route::get('/test', [CalculationController::class, 'test'])->name('test'); // tesdt pdfa
+    // Route::get('/test', [CalculationController::class, 'test'])->name('test'); // tesdt pdfa
 });

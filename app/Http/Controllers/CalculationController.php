@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Calculation;
+use Illuminate\Support\Str;
 
 class CalculationController extends Controller
 {
@@ -133,7 +134,8 @@ class CalculationController extends Controller
 
         if (!$exists) {
             $calculation_code = \explode('.',$filename);
-            $calculation = \App\Models\Calculation::where('code', $calculation_code[0])->first();
+            $code = Str::of($calculation_code[0])->replace('_', '/');
+            $calculation = \App\Models\Calculation::where('code', $code)->first();
 
             if (!$calculation) {
                 notify()->error('Nie można pobrać wyceny', 'Błąd');
@@ -159,7 +161,8 @@ class CalculationController extends Controller
 
         if (!$exists) {
             $calculation_code = \explode('.', $filename);
-            $calculation = \App\Models\Calculation::where('code', $calculation_code[0])->first();
+            $code = Str::of($calculation_code[0])->replace('_', '/');
+            $calculation = \App\Models\Calculation::where('code', $code)->first();
 
             if (!$calculation) {
                 notify()->error('Nie można pobrać opisu', 'Błąd');
@@ -185,7 +188,8 @@ class CalculationController extends Controller
 
         if (!$exists) {
             $calculation_code = \explode('.', $filename);
-            $calculation = \App\Models\Calculation::where('code', $calculation_code[0])->first();
+            $code = Str::of($calculation_code[0])->replace('_', '/');
+            $calculation = \App\Models\Calculation::where('code', $code)->first();
 
             if (!$calculation) {
                 notify()->error('Nie można pobrać protokołu', 'Błąd');
@@ -211,7 +215,8 @@ class CalculationController extends Controller
 
         if (!$exists) {
             $calculation_code = \explode('.',$filename);
-            $calculation = \App\Models\Calculation::where('code', $calculation_code[0])->with('aum')->first();
+            $code = Str::of($calculation_code[0])->replace('_', '/');
+            $calculation = \App\Models\Calculation::where('code', $code)->with('aum')->first();
 
             if (!$calculation) {
                 notify()->error('Nie można pobrać arkusza', 'Błąd');
@@ -230,18 +235,18 @@ class CalculationController extends Controller
         return response()->file($url);
     }
 
-    public function test()
-    {
-        $calculation = \App\Models\Calculation::where('id', 26)->with('aum', 'user')->first();
+    // public function test()
+    // {
+    //     $calculation = \App\Models\Calculation::where('id', 26)->with('aum', 'user')->first();
 
-        $data = [
-            'calculation' => $calculation
-        ];
+    //     $data = [
+    //         'calculation' => $calculation
+    //     ];
 
-        // $pdf = \PDF::loadView('pdf.agreement', $data)->setPaper([0, 0, 595.28, 841.89], 'portrait');
-        // $pdf = \PDF::loadView('pdf.opis', $data)->setPaper([0, 0, 595.28, 841.89], 'portrait');
-        // $pdf = \PDF::loadView('pdf.protokol', $data)->setPaper([0, 0, 595.28, 841.89], 'portrait');
-        $pdf = \PDF::loadView('pdf.aum', $data)->setPaper([0, 0, 595.28, 841.89], 'portrait');
-        return $pdf->stream();
-    }
+    //     // $pdf = \PDF::loadView('pdf.agreement', $data)->setPaper([0, 0, 595.28, 841.89], 'portrait');
+    //     // $pdf = \PDF::loadView('pdf.opis', $data)->setPaper([0, 0, 595.28, 841.89], 'portrait');
+    //     // $pdf = \PDF::loadView('pdf.protokol', $data)->setPaper([0, 0, 595.28, 841.89], 'portrait');
+    //     $pdf = \PDF::loadView('pdf.aum', $data)->setPaper([0, 0, 595.28, 841.89], 'portrait');
+    //     return $pdf->stream();
+    // }
 }

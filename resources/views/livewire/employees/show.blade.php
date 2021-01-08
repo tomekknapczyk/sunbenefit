@@ -3,6 +3,10 @@
         <x-slot name="thead">
             <tr>
                 <th class="px-6 py-3 bg-gray-50 dark:bg-gray-800 text-left text-xs leading-4 font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
+                    Kod
+                </th>
+                <th cl
+                <th class="px-6 py-3 bg-gray-50 dark:bg-gray-800 text-left text-xs leading-4 font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
                     Imię i nazwisko
                 </th>
                 <th class="px-6 py-3 bg-gray-50 dark:bg-gray-800 text-left text-xs leading-4 font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
@@ -21,6 +25,9 @@
         <x-slot name="tbody">
             @foreach($employees as $employee)
                 <tr>
+                    <td class="px-6 py-4 whitespace-no-wrap">
+                        <div class="text-sm leading-5 text-gray-900 dark:text-gray-400">{{ $employee->kod }}</div>
+                    </td>
                     <td class="px-6 py-4 whitespace-no-wrap">
                         <div class="text-sm leading-5 text-gray-900 dark:text-gray-400">{{ $employee->name }} {{ $employee->lastname }}</div>
                         <div class="text-sm leading-5 text-gray-500 dark:text-gray-500">{{ $employee->email }}</div>

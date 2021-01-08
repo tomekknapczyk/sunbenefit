@@ -8,31 +8,38 @@
     </x-slot>
 
     <x-slot name="form">
+        <!-- Code -->
+        <div class="col-span-6 sm:col-span-4">
+            <x-jet-label for="code" value="{{ __('Code') }}" />
+            <x-jet-input id="code" type="text" class="mt-1 block w-full" wire:model.defer="code"/>
+            <x-jet-input-error for="code" class="mt-2" />
+        </div>
+
         <!-- Name -->
         <div class="col-span-6 sm:col-span-4">
             <x-jet-label for="name" value="{{ __('First Name') }}" />
-            <x-jet-input id="name" type="text" class="mt-1 block w-full" wire:model.defer="name" autocomplete="name" />
+            <x-jet-input id="name" type="text" class="mt-1 block w-full" wire:model.defer="name"/>
             <x-jet-input-error for="name" class="mt-2" />
         </div>
 
         <!-- Lastname -->
         <div class="col-span-6 sm:col-span-4">
             <x-jet-label for="lastname" value="{{ __('Lastname') }}" />
-            <x-jet-input id="lastname" type="text" class="mt-1 block w-full" wire:model.defer="lastname" autocomplete="lastname" />
+            <x-jet-input id="lastname" type="text" class="mt-1 block w-full" wire:model.defer="lastname"/>
             <x-jet-input-error for="lastname" class="mt-2" />
         </div>
 
         <!-- Phone -->
         <div class="col-span-6 sm:col-span-4">
             <x-jet-label for="phone" value="{{ __('Phone') }}" />
-            <x-jet-input id="phone" type="text" class="mt-1 block w-full" wire:model.defer="phone" autocomplete="phone" />
+            <x-jet-input id="phone" type="text" class="mt-1 block w-full" wire:model.defer="phone"/>
             <x-jet-input-error for="phone" class="mt-2" />
         </div>
 
         <!-- Email -->
         <div class="col-span-6 sm:col-span-4">
             <x-jet-label for="email" value="{{ __('Email') }}" />
-            <x-jet-input id="email" type="email" class="mt-1 block w-full" wire:model.lazy="email" />
+            <x-jet-input id="email" type="email" class="mt-1 block w-full" wire:model.lazy="email"/>
             <x-jet-input-error for="email" class="mt-2" />
         </div>
 
@@ -50,11 +57,11 @@
         <div class="rounded-xl p-3 col-span-6 sm:col-span-4 shadow dark:border dark:border-gray-400">
             <x-jet-label for="password" value="{{ __('New Password') }}" />
             <div>
-                <x-jet-input id="password" type="password" class="mt-1 block w-full" wire:model.defer="password" autocomplete="new-password" />
+                <x-jet-input id="password" type="password" class="mt-1 block w-full" wire:model.defer="password"/>
             </div>
             <div class="mt-2">
                 <x-jet-label for="password_confirmation" value="{{ __('Confirm Password') }}" />
-                <x-jet-input id="password_confirmation" type="password" class="mt-1 block w-full" wire:model.defer="password_confirmation" autocomplete="new-password" />
+                <x-jet-input id="password_confirmation" type="password" class="mt-1 block w-full" wire:model.defer="password_confirmation"/>
                 
                 <x-jet-input-error for="password" class="mt-2" />
                 <x-jet-input-error for="password_confirmation" class="mt-2" />

@@ -310,10 +310,10 @@ class Create extends Component
         $this->selectedWarranty = $data[5];
     }
 
-    public function updated($propertyName)
-    {
-        // $this->validateOnly($propertyName);
-    }
+    // public function updated($propertyName)
+    // {
+    //     // $this->validateOnly($propertyName);
+    // }
 
     public function saveCalculation()
     {
@@ -336,7 +336,13 @@ class Create extends Component
             $edited->delete();
         }
 
-        $code = 'wycena_' . time();
+        $date = \Carbon\Carbon::now();
+
+        $id = auth()->user()->kod?auth()->user()->kod:'id'.auth()->user()->id;
+
+        $nr = \DB::table('calculations')->max('id') + 1;
+
+        $code = $id.'/'.$nr.'/'.$date->format('m/Y');
 
         $calculation = \App\Models\Calculation::create([
             'code' => $code,
