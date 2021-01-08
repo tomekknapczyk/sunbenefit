@@ -38,50 +38,50 @@
 
                                 <!-- Name -->
                                 <div class="col-span-6 sm:col-span-3">
-                                    <x-jet-label for="name" value="{{ __('First Name') }} {{ __('Lastname') }} / {{ __('Company') }}" />
-                                    <x-jet-input id="name" type="text" class="mt-1 block w-full" wire:model.defer="name" autocomplete="name" />
+                                    <x-jet-label for="name" value="{{ __('First Name') }} {{ __('Lastname') }} / {{ __('Company') }}"/>
+                                    <x-jet-input id="name" type="text" class="mt-1 block w-full" wire:model.defer="name"/>
                                     <x-jet-input-error for="name" class="mt-2" />
                                 </div>
 
                                 <!-- Nip -->
                                 <div class="col-span-6 sm:col-span-3">
                                     <x-jet-label for="nip" value="{{ __('Nip') }} ({{ __('Optional') }})" />
-                                    <x-jet-input id="nip" type="text" class="mt-1 block w-full" wire:model.defer="nip" autocomplete="nip" />
+                                    <x-jet-input id="nip" type="text" class="mt-1 block w-full" wire:model.defer="nip"/>
                                     <x-jet-input-error for="nip" class="mt-2" />
                                 </div>
 
                                 <!-- Address -->
                                 <div class="col-span-6 sm:col-span-2">
                                     <x-jet-label for="address" value="{{ __('Address') }}" />
-                                    <x-jet-input id="address" type="text" class="mt-1 block w-full" wire:model="address" autocomplete="address"  wire:keyup.debounce.150ms="changeAddress" />
+                                    <x-jet-input id="address" type="text" class="mt-1 block w-full" wire:model.defer="address"/>
                                     <x-jet-input-error for="address" class="mt-2" />
                                 </div>
 
                                 <!-- Zip code -->
                                 <div class="col-span-6 sm:col-span-2">
                                     <x-jet-label for="zipCode" value="{{ __('Zip code') }}" />
-                                    <x-jet-input id="zipCode" type="text" class="mt-1 block w-full" wire:model="zipCode" autocomplete="zip_code"  wire:keyup.debounce.150ms="changeZipCode" />
+                                    <x-jet-input id="zipCode" type="text" class="mt-1 block w-full" wire:model.defer="zipCode"/>
                                     <x-jet-input-error for="zipCode" class="mt-2" />
                                 </div>
 
                                 <!-- City -->
                                 <div class="col-span-6 sm:col-span-2">
                                     <x-jet-label for="city" value="{{ __('City') }}" />
-                                    <x-jet-input id="city" type="text" class="mt-1 block w-full" wire:model="city" autocomplete="city"  wire:keyup.debounce.150ms="changeCity" />
+                                    <x-jet-input id="city" type="text" class="mt-1 block w-full" wire:model.defer="city"/>
                                     <x-jet-input-error for="city" class="mt-2" />
                                 </div>
 
                                 <!-- Phone -->
                                 <div class="col-span-6 sm:col-span-3">
                                     <x-jet-label for="phone" value="{{ __('Phone') }}" />
-                                    <x-jet-input id="phone" type="text" class="mt-1 block w-full" wire:model.defer="phone" autocomplete="phone" />
+                                    <x-jet-input id="phone" type="text" class="mt-1 block w-full" wire:model.defer="phone"/>
                                     <x-jet-input-error for="phone" class="mt-2" />
                                 </div>
 
                                 <!-- Email -->
                                 <div class="col-span-6 sm:col-span-3">
                                     <x-jet-label for="email" value="{{ __('Email') }}" />
-                                    <x-jet-input id="email" type="text" class="mt-1 block w-full" wire:model.defer="email" autocomplete="email" />
+                                    <x-jet-input id="email" type="text" class="mt-1 block w-full" wire:model.defer="email"/>
                                     <x-jet-input-error for="email" class="mt-2" />
                                 </div>
                             </div>
@@ -110,21 +110,21 @@
                                         <!-- Invest Address -->
                                         <div class="col-span-6 sm:col-span-2">
                                             <x-jet-label for="investAddress" value="{{ __('Address') }}" />
-                                            <x-jet-input id="investAddress" type="text" class="mt-1 block w-full" wire:model.defer="investAddress" />
+                                            <x-jet-input id="investAddress" type="text" class="mt-1 block w-full" wire:model.defer="investAddress"/>
                                             <x-jet-input-error for="investAddress" class="mt-2" />
                                         </div>
 
                                         <!-- Invest Zip code -->
                                         <div class="col-span-6 sm:col-span-2">
                                             <x-jet-label for="investZipCode" value="{{ __('Zip code') }}" />
-                                            <x-jet-input id="investZipCode" type="text" class="mt-1 block w-full" wire:model.defer="investZipCode" />
+                                            <x-jet-input id="investZipCode" type="text" class="mt-1 block w-full" wire:model.defer="investZipCode"/>
                                             <x-jet-input-error for="investZipCode" class="mt-2" />
                                         </div>
 
                                         <!-- Invest City -->
                                         <div class="col-span-6 sm:col-span-2">
                                             <x-jet-label for="investCity" value="{{ __('City') }}" />
-                                            <x-jet-input id="investCity" type="text" class="mt-1 block w-full" wire:model.defer="investCity" />
+                                            <x-jet-input id="investCity" type="text" class="mt-1 block w-full" wire:model.defer="investCity"/>
                                             <x-jet-input-error for="investCity" class="mt-2" />
                                         </div>
                                     </div>
@@ -364,18 +364,6 @@
                         </div>
                         <x-jet-section-border />
                     @endforeach
-
-                    {{-- <div class="flex items-center justify-end">
-                        <div class="flex items-center justify-end">
-                            <x-jet-action-message class="mr-3 text-white bg-green-200 p-2 rounded" on="applied">
-                                {{ __('Saved.') }}
-                            </x-jet-action-message>
-                
-                            <x-jet-button wire:loading.attr="disabled" wire:click.prevent='calcSurcharges'>
-                                {{ __('Apply') }}
-                            </x-jet-button>
-                        </div>
-                    </div> --}}
                 </x-slot>
             </x-modal>
 
@@ -384,14 +372,14 @@
                 <x-slot name="content">
                     <div class="grid grid-cols-1 gap-3">
                         <div>
-                            <x-jet-label for="powerPrice" value="Cena prądu" />
-                            <x-jet-input name="powerPrice" id="powerPrice" type="number" step=".01" class="mt-1 block w-full" wire:model="powerPrice" wire:keyup.debounce.150ms="calcConsumption" />
+                            <x-jet-label for="powerPrice" value="Cena prądu"/>
+                            <x-jet-input name="powerPrice" id="powerPrice" type="number" step=".01" class="mt-1 block w-full" wire:model="powerPrice" wire:keyup.debounce.150ms="calcConsumption"/>
                             <x-jet-input-error for="powerPrice" class="mt-2" />
                         </div>
             
                         <div>
-                            <x-jet-label for="perfect" value="Współczynnik idealnej mocy PV" />
-                            <x-jet-input name="perfect" id="perfect" type="number" step=".01" class="mt-1 block w-full" wire:model="perfect" />
+                            <x-jet-label for="perfect" value="Współczynnik idealnej mocy PV"/>
+                            <x-jet-input name="perfect" id="perfect" type="number" step=".01" class="mt-1 block w-full" wire:model="perfect"/>
                             <x-jet-input-error for="perfect" class="mt-2" />
                         </div>
                     </div>
@@ -410,7 +398,7 @@
                     <x-slot name="description"></x-slot>
                 </x-jet-section-title>
 
-                <div class="mt-5 md:mt-0 md:col-span-2" >
+                <div class="mt-5 md:mt-0 md:col-span-2">
                     <div class="shadow overflow-hidden sm:rounded-md">
                         <div class="px-4 py-5 bg-white dark:bg-gray-900 sm:p-6">
                             <div class="grid grid-cols-6 gap-6 text-gray-900 dark:text-gray-100 items-center">

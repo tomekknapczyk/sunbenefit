@@ -240,57 +240,15 @@ class Create extends Component
     }
 
     /**
-     * Set invest address same as investor address if same place
-     *
-     * @return void
-     */
-    public function changeAddress()
-    {
-        if ($this->samePlace) {
-            $this->investAddress = $this->address;
-        }
-    }
-
-    /**
-     * Set invest city same as investor city if same place
-     *
-     * @return void
-     */
-    public function changeCity()
-    {
-        if ($this->samePlace) {
-            $this->investCity = $this->city;
-        }
-    }
-
-    /**
-     * Set invest zip code same as investor zip code if same place
-     *
-     * @return void
-     */
-    public function changeZipCode()
-    {
-        if ($this->samePlace) {
-            $this->investZipCode = $this->zipCode;
-        }
-    }
-
-    /**
      * Set invest place
      *
      * @return void
      */
     public function changeSamePlace()
     {
-        if ($this->samePlace) {
-            $this->investAddress = '';
-            $this->investCity = '';
-            $this->investZipCode = '';
-        } else {
-            $this->investAddress = $this->address;
-            $this->investCity = $this->city;
-            $this->investZipCode = $this->zipCode;
-        }
+        $this->investAddress = '-';
+        $this->investCity = '-';
+        $this->investZipCode = '-';
 
         $this->samePlace = !$this->samePlace;
     }
@@ -355,9 +313,9 @@ class Create extends Component
             'nip' => $this->nip,
             'phone' => $this->phone,
             'email' => $this->email,
-            'invest_address' => $this->investAddress,
-            'invest_zip_code' => $this->investZipCode,
-            'invest_city' => $this->investCity,
+            'invest_address' => $this->samePlace?$this->address:$this->investAddress,
+            'invest_zip_code' => $this->samePlace?$this->zipCode:$this->investZipCode,
+            'invest_city' => $this->samePlace?$this->city:$this->investCity,
             'same_place' => $this->samePlace,
             'company' => $this->company,
             'deposit' => $this->deposit,
