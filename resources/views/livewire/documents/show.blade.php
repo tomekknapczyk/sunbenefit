@@ -50,7 +50,7 @@
         </x-slot>
 
         <x-slot name="footer">
-            <x-jet-secondary-button wire:click="$toggle('changingStatus')" wire:loading.attr="disabled">
+            <x-jet-secondary-button wire:click="$toggle('deleteDocument')" wire:loading.attr="disabled">
                 {{ __('Nevermind') }}
             </x-jet-secondary-button>
 

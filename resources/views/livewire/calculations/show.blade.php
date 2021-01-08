@@ -43,12 +43,15 @@
                             <a href="{{ route('edit_calculation', $calculation) }}" class="ml-2 mb-2 inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25">
                                 Edytuj
                             </a>
-                        @endif
 
-                        @if($calculation->getRawOriginal('status') == 1)
                             <a href="{{ route('edit_calculation_aum', $calculation) }}" class="ml-2 mb-2 inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25">
                                 Edytuj Aum
                             </a>
+                            @if($calculation->user_id == auth()->user()->id)
+                                <x-jet-danger-button class="ml-2" wire:click="confirmDeleteCalculation({{ $calculation->id }})" wire:loading.attr="disabled">
+                                    {{ __('Delete') }}
+                                </x-jet-danger-button>
+                            @endif
                         @endif
                     </td>
                 </tr>
@@ -82,4 +85,36 @@
             @endforeach
         </x-slot>
     </x-table>
+
+    <x-jet-action-message class="text-white bg-red-400 p-2 rounded-b" on="deleteError">
+        {{ __('Nie można usunąć wybranej wyceny.') }}
+    </x-jet-action-message>
+
+    <!-- Change Module Status Modal -->
+    <x-jet-dialog-modal id="deleteCalculationModal" wire:model="deleteCalculation">
+        <x-slot name="title">
+            @if(isset($selectedCalculation))
+                {{ __('Delete') }}
+                <p class="text-gray-500 text-sm">{{ $selectedCalculation->code }}</p>
+            @endif
+        </x-slot>
+
+        <x-slot name="content">
+            @if(isset($selectedCalculation))
+                {{ __('Czy na pewno chcesz usunąć tę wycenę?') }}
+            @endif
+        </x-slot>
+
+        <x-slot name="footer">
+            <x-jet-secondary-button wire:click="$toggle('deleteCalculation')" wire:loading.attr="disabled">
+                {{ __('Nevermind') }}
+            </x-jet-secondary-button>
+
+            @if(isset($selectedCalculation))
+                <x-jet-danger-button class="ml-2" wire:click="deleteCalculation" wire:loading.attr="disabled">
+                    {{ __('Delete') }}
+                </x-jet-danger-button>
+            @endif
+        </x-slot>
+    </x-jet-dialog-modal>
 </div>

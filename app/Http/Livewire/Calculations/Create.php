@@ -286,10 +286,10 @@ class Create extends Component
                 return back();
             }
 
-            \Storage::delete('wyceny/'. $edited->code . '.pdf');
-            \Storage::delete('protokoly/'. $edited->code . '.pdf');
-            \Storage::delete('opisy/'. $edited->code . '.pdf');
-            \Storage::delete('aum/'. $edited->code . '.pdf');
+            \Storage::delete('wyceny/'. $edited->code_slug() . '.pdf');
+            \Storage::delete('protokoly/'. $edited->code_slug() . '.pdf');
+            \Storage::delete('opisy/'. $edited->code_slug() . '.pdf');
+            \Storage::delete('aum/'. $edited->code_slug() . '.pdf');
             
             $edited->delete();
         }
