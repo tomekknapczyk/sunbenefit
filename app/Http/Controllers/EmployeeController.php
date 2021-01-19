@@ -74,8 +74,10 @@ class EmployeeController extends Controller
      *
      * @return Illuminate\View\View
      */
-    public function edit(User $employee)
+    public function edit($id)
     {
+        $employee = User::withTrashed()->find($id);
+
         $data = [
             'employee' => $employee,
         ];

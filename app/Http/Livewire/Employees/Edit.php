@@ -67,14 +67,14 @@ class Edit extends Component
      *
      * @return void
      */
-    public function mount(User $employee)
+    public function mount($id)
     {
-        $this->employee = $employee;
-        $this->code = $employee->kod;
-        $this->name = $employee->name;
-        $this->lastname = $employee->lastname;
-        $this->phone = $employee->phone;
-        $this->email = $employee->email;
+        $this->employee = User::withTrashed()->find($id);
+        $this->code = $this->employee->kod;
+        $this->name = $this->employee->name;
+        $this->lastname = $this->employee->lastname;
+        $this->phone = $this->employee->phone;
+        $this->email = $this->employee->email;
     }
 
     public function render()

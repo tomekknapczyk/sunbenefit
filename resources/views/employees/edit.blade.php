@@ -19,7 +19,7 @@
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <livewire:employees.edit :employee="$employee"/>
+            <livewire:employees.edit :id="$employee->id"/>
         </div>
     </div>
 </x-app-layout>

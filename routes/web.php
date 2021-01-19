@@ -31,7 +31,7 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
     Route::get('/pracownicy', [EmployeeController::class, 'index'])->name('employees')->middleware('can:list user');
     Route::get('/nowy-pracownik', [EmployeeController::class, 'create'])->name('create_employee')->middleware('can:create user');
     Route::get('/konfiguracja-kalkulatora', [EmployeeController::class, 'calculator'])->name('calculator');
-    Route::get('/edycja-pracownika/{employee}', [EmployeeController::class, 'edit'])->name('edit_employee')->middleware('can:edit employee');
+    Route::get('/edycja-pracownika/{id}', [EmployeeController::class, 'edit'])->name('edit_employee')->middleware('can:edit employee');
 
     Route::get('/moduly', [ModuleController::class, 'index'])->name('modules')->middleware('can:list module');
     Route::get('/nowy-modul', [ModuleController::class, 'create'])->name('create_module')->middleware('can:create module');
