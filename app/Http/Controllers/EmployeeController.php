@@ -68,4 +68,18 @@ class EmployeeController extends Controller
 
         return view('employees.calculator', $data);
     }
+
+    /**
+     * Show employee edit form
+     *
+     * @return Illuminate\View\View
+     */
+    public function edit(User $employee)
+    {
+        $data = [
+            'employee' => $employee,
+        ];
+
+        return view('employees.edit', $data);
+    }
 }

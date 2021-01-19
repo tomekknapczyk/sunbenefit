@@ -50,6 +50,9 @@
                         @endif
                     </td>
                     <td class="px-6 py-4 whitespace-no-wrap text-right text-sm leading-5 font-medium">
+                        <a href="{{ route('edit_employee', $employee['id']) }}" class="ml-2 inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25">
+                            Edytuj
+                        </a>
                         <x-jet-button class="ml-2" wire:click="confirmChangingGroup({{ $employee['id'] }})" wire:loading.attr="disabled">
                             {{ __('Change group') }}
                         </x-jet-button>
