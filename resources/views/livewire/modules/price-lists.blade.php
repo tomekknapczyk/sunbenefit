@@ -113,7 +113,9 @@
                             <tr>
                                 @foreach($groups as $group)
                                     <td class="px-6 py-2 whitespace-no-wrap text-xs dark:text-gray-400">
-                                        {{ $price['price_'.$group->name] }}
+                                        @if(isset($price['price_'.$group->name]))
+                                            {{ $price['price_'.$group->name] }}
+                                        @endif
                                     </td>
                                 @endforeach
                                 <td class="px-6 py-2 whitespace-no-wrap text-xs dark:text-gray-400">

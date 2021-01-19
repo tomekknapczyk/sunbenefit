@@ -174,10 +174,13 @@ class PriceLists extends Component
             if ($line) {
                 $field = count($line);
                 $i = 0;
+                $j = $field - 2;
                 
                 if ($field > 2) {
                     foreach ($this->groups as $group) {
-                        $this->newPrice($line[$i++], $line[$field - 2], $line[$field - 1], $group->name);
+                        if ($i < $j) {
+                            $this->newPrice($line[$i++], $line[$field - 2], $line[$field - 1], $group->name);
+                        }
                     }
                 }
             }
@@ -197,9 +200,9 @@ class PriceLists extends Component
     {
         $new_price = new \App\Models\ModulePrice();
         $new_price->price_list_id = $this->priceList->id;
-        $new_price->price =  str_replace(",", ".", str_replace(" ", "", $price));
-        $new_price->power =str_replace(",", ".", str_replace(" ", "", $power));
-        $new_price->qty =str_replace(",", ".", str_replace(" ", "", $qty));
+        $new_price->price = str_replace(",", ".", str_replace(" ", "", $price));
+        $new_price->power = str_replace(",", ".", str_replace(" ", "", $power));
+        $new_price->qty = str_replace(",", ".", str_replace(" ", "", $qty));
         $new_price->save();
 
         $new_price->assignGroup($group);
