@@ -172,9 +172,13 @@ class Module extends Component
         }
 
         // vat 8% i 23%
-        if ($this->company) {
-            $base_price = $this->price / 1.08;
-            $this->price = round($base_price * 1.23);
+        // if ($this->company) {
+        //     $base_price = $this->price / 1.08;
+        //     $this->price = round($base_price * 1.23);
+        // }
+
+        if (!$this->company) {
+            $this->price = round($this->price * 1.08);
         }
 
         $this->updateSurcharges();
