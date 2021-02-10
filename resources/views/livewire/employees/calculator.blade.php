@@ -21,6 +21,7 @@
                 <x-jet-input-error for="module_1" class="mt-2" />
             </div>
 
+            @can('edit margin')
             <!-- margin 1 -->
             <div class="p-2">
                 <x-jet-label for="margin_1" value="{{ __('Margin') }}" />
@@ -30,6 +31,7 @@
                 </div>
                 <x-jet-input-error for="margin_1" class="mt-2" />
             </div>
+            @endcan
         </div>
 
         <div class="col-span-6 sm:col-span-4 p-4 border rounded-lg">
@@ -45,6 +47,7 @@
                 <x-jet-input-error for="module_2" class="mt-2" />
             </div>
 
+            @can('edit margin')
             <!-- margin 2 -->
             <div class="p-2">
                 <x-jet-label for="margin_2" value="{{ __('Margin') }}" />
@@ -54,6 +57,7 @@
                 </div>
                 <x-jet-input-error for="margin_2" class="mt-2" />
             </div>
+            @endcan
         </div>
 
         <div class="col-span-6 sm:col-span-4 p-4 border rounded-lg">
@@ -69,6 +73,7 @@
                 <x-jet-input-error for="module_3" class="mt-2" />
             </div>
 
+            @can('edit margin')
             <!-- margin 3 -->
             <div class="p-2">
                 <x-jet-label for="margin_3" value="{{ __('Margin') }}" />
@@ -78,6 +83,7 @@
                 </div>
                 <x-jet-input-error for="margin_3" class="mt-2" />
             </div>
+            @endcan
         </div>
 
         <div class="col-span-6">

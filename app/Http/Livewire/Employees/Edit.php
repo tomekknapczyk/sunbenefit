@@ -19,6 +19,7 @@ class Edit extends Component
     public $password;
     public $password_confirmation;
     public $pass;
+    public $editable;
 
     /**
      * The component's employee.
@@ -41,7 +42,8 @@ class Edit extends Component
             'lastname' => ['required', 'string', 'max:255'],
             'phone' => ['nullable', 'string', 'max:255'],
             'email' => ['required', 'email', 'max:255', Rule::unique('users')->ignore($this->employee->id)],
-            'password' => ['exclude_unless:pass,1', 'string', new Password, 'confirmed']
+            'password' => ['exclude_unless:pass,1', 'string', new Password, 'confirmed'],
+            'editable' => ['required', 'boolean'],
         ]);
 
         $this->employee->name = $this->name;
@@ -56,6 +58,17 @@ class Edit extends Component
         }
 
         $this->employee->save();
+
+        if ($this->editable == 0) {
+            $this->employee->revokePermissionTo('edit margin');
+
+            $this->employee->calculator->margin_1 = 0;
+            $this->employee->calculator->margin_2 = 0;
+            $this->employee->calculator->margin_3 = 0;
+            $this->employee->calculator->save();
+        } else {
+            $this->employee->givePermissionTo('edit margin');
+        }
 
         notify()->success('Przedstawiciel zapisany!', 'Sukces');
         
@@ -75,6 +88,7 @@ class Edit extends Component
         $this->lastname = $this->employee->lastname;
         $this->phone = $this->employee->phone;
         $this->email = $this->employee->email;
+        $this->editable = $this->employee->hasPermissionTo('edit margin');
     }
 
     public function render()

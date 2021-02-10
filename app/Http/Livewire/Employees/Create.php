@@ -20,6 +20,7 @@ class Create extends Component
     public $password;
     public $password_confirmation;
     public $group = 'A';
+    public $editable = false;
 
     public function updated($propertyName)
     {
@@ -31,6 +32,7 @@ class Create extends Component
             'email' => ['required', 'email', 'max:255', 'unique:users'],
             'group' => ['required', 'string'],
             'password' => $this->passwordRules(),
+            'editable' => ['required', 'boolean'],
         ]);
     }
 
@@ -50,6 +52,7 @@ class Create extends Component
             'email' => ['required', 'email', 'max:255', 'unique:users'],
             'group' => ['required', 'string'],
             'password' => $this->passwordRules(),
+            'editable' => ['required', 'boolean'],
         ]);
 
         $user = User::create([
@@ -64,6 +67,10 @@ class Create extends Component
         $user->assignRole('przedstawiciel');
 
         $user->assignGroup($this->group);
+        
+        if ($this->editable == 1) {
+            $user->givePermissionTo('edit margin');
+        }
 
         notify()->success('Przedstawiciel utworzony!', 'Sukces');
         

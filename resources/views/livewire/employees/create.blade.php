@@ -54,6 +54,20 @@
             <x-jet-input-error for="group" class="mt-2" />
         </div>
 
+        <!-- Editable margin -->
+        <div class="col-span-6 sm:col-span-4">
+            <x-jet-label value="{{ __('Editable margin') }}" />
+            <div class="flex items-center mt-2">
+                <input type="radio" id="editable_yes" wire:model.defer="editable" name="editable" class="appearance-none h-3 w-3 border border-gray-400 rounded-full checked:bg-gray-900 dark:checked:bg-gray-100 checked:border-transparent focus:outline-none" value="1" />
+                <x-jet-label for="editable_yes" value="{{ __('Yes') }}" class="pl-1 leading-none" />
+            </div>
+            <div class="flex items-center mt-2">
+                <input type="radio" id="editable_no" wire:model.defer="editable" name="editable" class="appearance-none h-3 w-3 border border-gray-400 rounded-full checked:bg-gray-900 dark:checked:bg-gray-100 checked:border-transparent focus:outline-none" value="0" />
+                <x-jet-label for="editable_no" value="{{ __('No') }}" class="pl-1 leading-none" />
+            </div>
+            <x-jet-input-error for="editable" class="mt-2" />
+        </div>
+
         <div class="rounded-xl p-3 col-span-6 sm:col-span-4 shadow dark:border dark:border-gray-400">
             <x-jet-label for="password" value="{{ __('New Password') }}" />
             <div>
