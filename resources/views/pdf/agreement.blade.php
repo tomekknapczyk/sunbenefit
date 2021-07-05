@@ -9,7 +9,7 @@
         footer .pagenum:before {content: counter(page);}
         html {font-size: 11px;}
         body {font-family: DejaVu Sans;font-weight: 400;color: #000;padding: 0;margin: 0;font-size: 1rem;width: 100%;}
-        
+
 
         .bg-green{background: #3AB558;}
         .text-green{color: #3AB558;}
@@ -125,8 +125,12 @@
                     </td>
                     <td style="width: 60%;">
                         <p>
-                            <strong>{{ $calculation->final_price }}</strong> złotych brutto<br><br>
-                            (słownie: {{ $calculation->inWords('final_price') }} 0/100 groszy) brutto
+                            @if($calculation->company)
+                                <strong>{{ round($calculation->final_price * 1.23, 2) }}</strong> złotych brutto<br><br>
+                            @else
+                                <strong>{{ $calculation->final_price }}</strong> złotych brutto<br><br>
+                            @endif
+                            (słownie: {{ $calculation->inWords('final_price') }} {{ $calculation->grosze('final_price') }}/100 groszy) brutto
                         </p>
                     </td>
                 </tr>
@@ -135,7 +139,7 @@
                         <p><strong>Stawka VAT:</strong></p>
                     </td>
                     <td style="width: 60%;">
-                        <p>{{ $calculation->company? "8%":"23%" }}</p>
+                        <p>{{ $calculation->company ? "23%":"8%" }}</p>
                     </td>
                 </tr>
                 <tr>
@@ -361,7 +365,7 @@
                             <h6>Klient</h6>
                         </td>
                         <td style="width: 60%;">
-                            
+
                         </td>
                         <td style="width: 20%; border-top:2px solid #000;">
                             <h6>SUNBENEFIT</h6>
@@ -370,5 +374,5 @@
                 </table>
             </div>
         </div>
-    </div>    
+    </div>
 </body></html>

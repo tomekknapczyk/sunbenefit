@@ -12,7 +12,7 @@ class Calculation extends Model
 
     protected $slowa = array(
         'minus',
-      
+
         array(
           'zero',
           'jeden',
@@ -24,7 +24,7 @@ class Calculation extends Model
           'siedem',
           'osiem',
           'dziewięć'),
-      
+
         array(
           'dziesięć',
           'jedenaście',
@@ -36,7 +36,7 @@ class Calculation extends Model
           'siedemnaście',
           'osiemnaście',
           'dziewiętnaście'),
-      
+
         array(
           'dziesięć',
           'dwadzieścia',
@@ -47,7 +47,7 @@ class Calculation extends Model
           'siedemdziesiąt',
           'osiemdziesiąt',
           'dziewięćdziesiąt'),
-      
+
         array(
           'sto',
           'dwieście',
@@ -58,17 +58,17 @@ class Calculation extends Model
           'siedemset',
           'osiemset',
           'dziewięćset'),
-      
+
         array(
           'tysiąc',
           'tysiące',
           'tysięcy'),
-      
+
         array(
           'milion',
           'miliony',
           'milionów'),
-      
+
         array(
           'miliard',
           'miliardy',
@@ -97,7 +97,7 @@ class Calculation extends Model
      */
     public function user()
     {
-        return $this->belongsTo('App\Models\User');
+        return $this->belongsTo('App\Models\User')->withTrashed();
     }
 
     /**
@@ -168,13 +168,33 @@ class Calculation extends Model
      */
     public function inWords($column)
     {
-        $kwota = explode('.', $this->$column);
-            
+        if($this->company && $column === 'final_price'){
+            $final = round($this->final_price * 1.23, 2);
+            $kwota = explode('.', $final);
+        } else {
+            $kwota = explode('.', $this->$column);
+        }
+
         $zl = preg_replace('/[^-\d]+/', '', $kwota[0]);
-            
+
         $slownie = $this->slownie($zl) . ' ' . $this->odmiana(array('złoty', 'złote', 'złotych'), $zl);
 
         return $slownie;
+    }
+
+    /**
+     * Get the calculation final price after dot
+     */
+    public function grosze($column)
+    {
+        if($this->company && $column === 'final_price'){
+            $final = round($this->final_price * 1.23, 2);
+            $kwota = explode('.', $final);
+        } else {
+            $kwota = explode('.', $this->$column);
+        }
+
+        return $kwota[1];
     }
 
     public function odmiana($odmiany, $int)
@@ -195,18 +215,18 @@ class Calculation extends Model
     {
         $wynik = '';
         $j = abs((int) $int);
-        
+
         if ($j == 0) {
             return $this->slowa[1][0];
         }
         $jednosci = $j % 10;
         $dziesiatki = ($j % 100 - $jednosci) / 10;
         $setki = ($j - $dziesiatki*10 - $jednosci) / 100;
-        
+
         if ($setki > 0) {
             $wynik .= $this->slowa[4][$setki-1].' ';
         }
-        
+
         if ($dziesiatki > 0) {
             if ($dziesiatki == 1) {
                 $wynik .= $this->slowa[2][$jednosci].' ';
@@ -214,7 +234,7 @@ class Calculation extends Model
                 $wynik .= $this->slowa[3][$dziesiatki-1].' ';
             }
         }
-        
+
         if ($jednosci > 0 && $dziesiatki != 1) {
             $wynik .= $this->slowa[1][$jednosci].' ';
         }
@@ -225,18 +245,18 @@ class Calculation extends Model
     {
         $in = preg_replace('/[^-\d]+/', '', $int);
         $out = '';
-        
+
         if ($in[0] == '-') {
             $in = substr($in, 1);
             $out = $this->slowa[0].' ';
         }
-        
+
         $txt = str_split(strrev($in), 3);
-        
+
         if ($in == 0) {
             $out = $this->slowa[1][0].' ';
         }
-        
+
         for ($i = count($txt) - 1; $i >= 0; $i--) {
             $liczba = (int) strrev($txt[$i]);
             if ($liczba > 0) {
